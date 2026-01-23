@@ -1,0 +1,37 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './lib/queryClient'
+import './index.css'
+
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Layout from './layouts/Layout'
+import NotFound from './pages/NotFound'
+import Settings from './pages/Settings'
+import ProfileMe from './pages/profile/ProfileMe'
+
+export default function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* App layout */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path='/profile/me' element={<ProfileMe />} />
+            <Route path="/settings" element={<Settings />} />
+             {/* Fallback */}
+          <Route path="*" element={<NotFound/>} />
+          </Route>
+
+         
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  )
+}
