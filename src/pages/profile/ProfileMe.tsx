@@ -1,5 +1,7 @@
 import { refreshApi } from "../../api/auth.api"
 import { useMyPosts, useMyProfile, useMyStats } from "../../features/profile/profile.queries"
+import ProfileMeSkeleton from "../../components/skeletons/ProfileMeSkeleton"
+
 
 const ProfileMe = () => {
   refreshApi()
@@ -10,8 +12,7 @@ const ProfileMe = () => {
   if (profile.isLoading || stats.isLoading
     //  || posts.isLoading
     )
-    return <div>Loading...</div>
-
+    return <ProfileMeSkeleton />
   if (profile.isError ||
      stats.isError 
     //  || posts.isError
@@ -39,7 +40,7 @@ const ProfileMe = () => {
     {/* Profile info */}
     <div className='w-full flex flex-col flex-wrap  text-center justify-center md:items-start items-center gap-5 p-3 md:text-start'>
       <div className='flex flex-col items-center justify-center md:items-start'>
-        <h1 className='text-[9vh] font-bold text-neutral-400'>
+        <h1 className='text-xl font-bold text-neutral-400'>
           u/ <span className= "text-neutral-900 uppercase" >{profile.data!.username}</span>
         </h1>
         {/* <p className='text-sm text-neutral-500'>

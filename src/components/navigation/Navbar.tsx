@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
 import { useAuthContext } from '../../context/AuthContext'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { ProfileSkeleton } from '../skeletons/ProfileSkeleton'
+
 
 interface NavbarProps {
   onMenuClick: () => void
@@ -50,9 +54,14 @@ const { user } = useAuthContext();
           TalkStack
         </Link>
 
-        {/* Profile */}
-       {user && (
-  <Link to="/profile/me" className="hidden md:flex items-center gap-2 border border-neutral-400 rounded-full p-1">
+      {/* Profile */}
+{user === undefined && <ProfileSkeleton />}
+
+{user && (
+  <Link
+    to="/profile/me"
+    className="hidden md:flex items-center gap-2 border border-neutral-400 rounded-full p-1"
+  >
     <img
       src={user.avatarUrl ?? 'https://i.pinimg.com/736x/15/fd/0b/15fd0b20dffb3c2da9f5ea662f6be75a.jpg'}
       alt={user.username}
@@ -64,6 +73,7 @@ const { user } = useAuthContext();
     </span>
   </Link>
 )}
+
 
 
       </div>
