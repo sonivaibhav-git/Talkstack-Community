@@ -7,40 +7,59 @@ export const useAuthSession = () => {
   const { accessToken, setAccessToken, setUser } = useAuthContext()
   const [loading, setLoading] = useState(true)
 
+  // 1️⃣ Ensure access token exists
   useEffect(() => {
     let alive = true
 
-    const initSession = async () => {
+    const ensureToken = async () => {
       try {
         if (!accessToken) {
-          const refreshRes = await refreshApi()
-          const newToken = refreshRes.data?.accessToken
-          // console.log("accessToken fetched" ,newToken)
-          if (!newToken) throw new Error('No token');
-
-          setAccessToken(newToken)
+          const res = await refreshApi()
+          const token = res.data?.accessToken
+          if (!token) throw new Error('No token')
+          if (alive) setAccessToken(token)
         }
-        // console.log("access token set",accessToken)
 
-        const meRes = await getMyProfileApi()
-        console.log(meRes.data)
-        if (!alive) return
-        setUser(meRes.data.data)
-      } catch (err) {
-        console.log(err)
+      } catch {
         setAccessToken(null)
+        setUser(null)
+        setLoading(false)
+      }
+    }
+
+    ensureToken()
+
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  // 2️⃣ Fetch user AFTER token is set
+  useEffect(() => {
+    if (!accessToken) return
+
+    let alive = true
+
+    const fetchUser = async () => {
+      try {
+        const res = await getMyProfileApi()
+        console.log("Fetching user")
+        if (alive) setUser(res.data)
+
+                  console.log(res.data)
+      } catch {
         setUser(null)
       } finally {
         if (alive) setLoading(false)
       }
     }
 
-    initSession()
+    fetchUser()
 
     return () => {
       alive = false
     }
-  }, [])
+  }, [accessToken])
 
   return { loading }
 }

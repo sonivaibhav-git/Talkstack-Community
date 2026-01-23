@@ -18,7 +18,7 @@ const Layout = () => {
           onClose={() => setSidebarOpen(false)}
         />
 
-        <main className="flex-1 px-4 py-6">
+        <main className="flex-1">
           <Outlet />
           <Footer />
         </main>

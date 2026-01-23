@@ -10,8 +10,15 @@ import Layout from './layouts/Layout'
 import NotFound from './pages/NotFound'
 import Settings from './pages/Settings'
 import ProfileMe from './pages/profile/ProfileMe'
+import { useAuthSession } from './features/auth/useAuthSession'
+// import { AuthGuard } from './features/auth/AuthGuard'
+
+
 
 export default function App() {
+   useAuthSession();
+   console.log('useAuthSession mounted')
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

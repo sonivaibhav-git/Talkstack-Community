@@ -24,9 +24,8 @@ const LogoutBtn = ({ onClose }: LogoutBtnProps) => {
     <button
       onClick={handleLogout}
       disabled={isPending}
-      className='flex items-center gap-2 px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition disabled:opacity-60'
+      className='flex items-center gap-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition disabled:opacity-60'
     >
-      <MdOutlineLogout className='h-5 w-5' />
       Log out
     </button>
   )

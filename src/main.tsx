@@ -5,10 +5,15 @@ import { AuthProvider, useAuthContext } from './context/AuthContext'
 import { setupInterceptors } from './lib/axios/interceptors'
 import App from './App'
 import './index.css'
+import { useEffect } from 'react'
 
 const Bootstrap = ({ children }: { children: React.ReactNode }) => {
   const { accessToken, setAccessToken } = useAuthContext()
-  setupInterceptors(() => accessToken, setAccessToken)
+
+  useEffect(() => {
+    setupInterceptors(() => accessToken, setAccessToken)
+  }, [accessToken])
+
   return children
 }
 

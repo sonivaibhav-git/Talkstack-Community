@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
@@ -16,8 +16,10 @@ const { user } = useAuthContext();
     onMenuClick()
   }
 
- 
-    console.log(user)
+ useEffect(() => {
+  console.log('USER UPDATED:', user)
+}, [user])
+  
   
 
   return (
@@ -49,14 +51,20 @@ const { user } = useAuthContext();
         </Link>
 
         {/* Profile */}
-        <Link to="/profile/me" className="hidden md:block">
-          <img
-            src="https://i.pinimg.com/736x/15/fd/0b/15fd0b20dffb3c2da9f5ea662f6be75a.jpg"
-            alt="Profile"
-            className="w-8 h-8 rounded-full border border-neutral-300 object-cover"
-            loading="lazy"
-          />
-        </Link>
+       {user && (
+  <Link to="/profile/me" className="hidden md:flex items-center gap-2 border border-neutral-400 rounded-full p-1">
+    <img
+      src={user.avatarUrl ?? 'https://i.pinimg.com/736x/15/fd/0b/15fd0b20dffb3c2da9f5ea662f6be75a.jpg'}
+      alt={user.username}
+      className="w-8 h-8 rounded-full border border-neutral-300 object-cover"
+      loading="lazy"
+    />
+    <span className="text-sm font-medium text-neutral-800">
+      {user.username}
+    </span>
+  </Link>
+)}
+
 
       </div>
     </nav>

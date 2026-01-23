@@ -13,7 +13,7 @@ const Settings = () => {
       </div>
 
       {/* Content */}
-      <div className='max-w-3xl mx-auto px-4 md:px-10 py-6'>
+      <div className='w-full py-6'>
         <ul className='divide-y divide-neutral-200 bg-white rounded-xl border border-neutral-200 overflow-hidden'>
 
           {/* Help */}

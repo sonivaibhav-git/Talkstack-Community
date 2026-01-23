@@ -17,6 +17,7 @@ type ItemProps = {
 function Item({ to, icon, activePath }: ItemProps) {
   const active = activePath === to
 
+    
   return (
     <Link
       to={to}

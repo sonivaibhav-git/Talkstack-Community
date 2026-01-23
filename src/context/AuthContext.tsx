@@ -4,6 +4,7 @@ type User = {
   id: string
   username: string
   email: string
+  avatarUrl:string
 }
 
 type AuthContextType = {
@@ -13,6 +14,7 @@ type AuthContextType = {
   setAccessToken: (token: string | null) => void
   setUser: (user: User | null) => void
 }
+
 const AuthContext = createContext<AuthContextType | null>(null)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
