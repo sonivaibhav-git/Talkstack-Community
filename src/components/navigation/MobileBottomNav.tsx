@@ -7,6 +7,7 @@ import {
   IoPersonCircleOutline
 } from 'react-icons/io5'
 import type { ReactNode } from 'react'
+import { useAuthContext } from '../../context/AuthContext'
 
 type ItemProps = {
   to: string
@@ -17,7 +18,7 @@ type ItemProps = {
 function Item({ to, icon, activePath }: ItemProps) {
   const active = activePath === to
 
-    
+    const {user} = useAuthContext();
   return (
     <Link
       to={to}
@@ -28,6 +29,9 @@ function Item({ to, icon, activePath }: ItemProps) {
       `}
     >
       <span className="text-xl">{icon}</span>
+   
+      
+      
     </Link>
   )
 }
@@ -45,7 +49,7 @@ export default function MobileBottomNav() {
           activePath={pathname}
         />
         <Item
-          to="/substacks"
+          to="/explore"
           icon={<IoCompassOutline size={24} />}
           activePath={pathname}
         />
@@ -61,6 +65,7 @@ export default function MobileBottomNav() {
         />
         <Item
           to="/profile/me"
+          
           icon={<IoPersonCircleOutline size={24} />}
           activePath={pathname}
         />

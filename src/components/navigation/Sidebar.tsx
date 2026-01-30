@@ -27,8 +27,8 @@ export default function Sidebar({ open }: SidebarProps) {
         className={`
           fixed md:sticky top-12 left-0 z-50
           h-[calc(100vh-3rem)]
-          w-64
-          bg-white border-r border-neutral-200
+          w-54
+          bg-white md:bg-none border-r border-neutral-200
           transform transition-transform duration-300
           ${open ? 'translate-x-0' : '-translate-x-full'}
           md:translate-x-0
@@ -39,7 +39,7 @@ export default function Sidebar({ open }: SidebarProps) {
             {/* Main */}
             <div className="hidden md:block pb-3 border-b border-neutral-300">
               <NavItem to="/" icon={<IoHomeOutline />} label="Home" />
-              <NavItem to="/substacks" icon={<IoCompassOutline />} label="Explore" />
+              <NavItem to="/explore" icon={<IoCompassOutline />} label="Explore" />
               <NavItem to="/posts/trending" icon={<IoTrendingUp />} label="Popular" />
               <NavItem to="/posts/create" icon={<IoCreateOutline />} label="Create Post" />
             </div>

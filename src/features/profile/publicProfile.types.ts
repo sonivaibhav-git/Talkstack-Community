@@ -3,6 +3,7 @@
 export type PublicProfileUser = {
   id: string
   username: string
+  displayName:string
   bio: string
   avatarUrl: string
 }

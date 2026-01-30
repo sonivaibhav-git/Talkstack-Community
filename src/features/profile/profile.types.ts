@@ -1,6 +1,7 @@
 export type MyProfile = {
   id: string
   username: string
+  displayName:string
   bio: string
   avatarUrl: string
 }
@@ -22,6 +23,49 @@ export type MyPost = {
   title: string
   substackSlug: string
   imageUrl: string
+  authorDto: AuthorDto
+  voteScore: number
+  upvotes: number
+  downvotes: number
+  createdAt: string
+}
+
+export type FollowingType = 'USER' | 'SUBSTACK'
+
+export type FollowingItem = {
+  id: string
+  type: FollowingType
+  username: string
+  avatar: string
+}
+
+export type UpdateProfilePayload = {
+  displayName: string
+  bio: string
+  avatarFile: File | null
+}
+
+export type Profile = {
+  id: string
+  username: string
+  displayName: string
+  bio: string
+  avatarUrl: string
+}
+
+
+export type AuthorDto = {
+  id: string
+  username: string
+  avatar: string
+}
+
+export type PostItem = {
+  id: string
+  title: string
+  substackSlug: string
+  imageUrl: string
+  authorDto: AuthorDto
   voteScore: number
   upvotes: number
   downvotes: number

@@ -1,6 +1,5 @@
 import { IoHelpCircleOutline, IoLogOutOutline } from 'react-icons/io5'
-import LogoutBtn from '../components/buttons/Logout'
-
+import LogoutBtn from '../../components/buttons/Logout'
 
 const Settings = () => {
   return (
@@ -15,7 +14,6 @@ const Settings = () => {
       {/* Content */}
       <div className='w-full'>
         <ul className='divide-y divide-neutral-200 bg-white rounded-xl border border-neutral-200 overflow-hidden'>
-
           {/* Help */}
           <li className='flex items-center gap-3 px-4 py-4 hover:bg-neutral-50 transition'>
             <IoHelpCircleOutline className='h-5 w-5 text-neutral-600' />
@@ -29,7 +27,6 @@ const Settings = () => {
             <IoLogOutOutline className='h-5 w-5 text-red-600' />
             <LogoutBtn />
           </li>
-
         </ul>
       </div>
     </div>

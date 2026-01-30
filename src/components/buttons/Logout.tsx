@@ -2,7 +2,6 @@ import { MdOutlineLogout } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../../features/auth/useLogout'
 
-
 interface LogoutBtnProps {
   onClose?: () => void
 }

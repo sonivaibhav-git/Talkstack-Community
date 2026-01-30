@@ -1,10 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   getMyProfileApi,
   getMyStatsApi,
-  getMyPostsApi
+  getMyPostsApi,
+  getMyFollowingApi,
+  updateMyProfileApi
 } from '../../api/user.api'
-import type { MyPost, MyProfile, MyStats } from './profile.types'
+import type { FollowingItem, MyPost, MyProfile, MyStats, UpdateProfilePayload } from './profile.types'
+import { toast } from 'react-toastify'
 
 
 
@@ -25,3 +28,25 @@ export const useMyPosts = () =>
     queryKey: ['me', 'posts'],
     queryFn: async () => (await getMyPostsApi()).data
   })
+
+
+export const useMyFollowing = () =>
+  useQuery<FollowingItem[]>({
+    queryKey: ['me', 'following'],
+    queryFn: async () => (await getMyFollowingApi()).data
+  })
+
+
+  export const useUpdateMyProfile = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (payload: UpdateProfilePayload) =>
+      updateMyProfileApi(payload),
+
+    onSuccess: res => {
+      toast.success(res.data.action || 'Profile updated')
+      queryClient.invalidateQueries({ queryKey: ['me', 'profile'] })
+    }
+  })
+}
