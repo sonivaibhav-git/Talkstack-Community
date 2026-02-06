@@ -43,10 +43,7 @@ export const useAuthSession = () => {
     const fetchUser = async () => {
       try {
         const res = await getMyProfileApi()
-        console.log("Fetching user")
         if (alive) setUser(res.data)
-
-                  console.log(res.data)
       } catch {
         setUser(null)
       } finally {

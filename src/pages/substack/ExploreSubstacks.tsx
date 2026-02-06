@@ -1,16 +1,30 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   useAllSubstacks,
   useTopSubstacks
 } from '../../features/substacks/substack.queries'
-import SubstackCard from '../../components/cards/SubstackCard'
-// import SubstackPill from '../../components/substack/SubstackPill'
 import { IoSearchSharp } from 'react-icons/io5'
+import SubstackBlock from '../../components/cards/SubstackBlock'
+import SubstackCard from '../../components/cards/SubstackCard'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
+
+
 
 const ExploreSubstacks = () => {
   const [query, setQuery] = useState('')
   const top = useTopSubstacks()
   const all = useAllSubstacks()
+
+  const filteredAll = useMemo(() => {
+    if (!all.data) return []
+    const q = query.trim().toLowerCase()
+    if (!q) return all.data
+    return all.data.filter(s =>
+      s.name.toLowerCase().includes(q)
+    )
+  }, [all.data, query])
 
   if (top.isLoading || all.isLoading) {
     return (
@@ -28,51 +42,57 @@ const ExploreSubstacks = () => {
     )
   }
 
-  const filtered = all.data!.filter(s =>
-    s.name.toLowerCase().includes(query.toLowerCase())
-  )
-
   return (
-    <div className='w-fit bg-neutral-100 '>
-      {/* Search (optional, does not affect layout contract) */}
-      <div className=' w-screen md:max-w-6xl mx-auto p-2 pb-18'>
-        <div className='w-full flex items-center gap-3'>
-        <span className='bg-white p-3 rounded-xl'>
-          <IoSearchSharp size={22} />
-        </span>
-
-        <input
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder='Search substacks…'
-          className='w-full p-3 rounded-xl bg-white'
-        />
+    <div className='w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
+      {/* Search */}
+      <div className='mb-6'>
+        <div className='flex items-center gap-2 bg-white border rounded-lg px-3'>
+          <IoSearchSharp size={20} className='text-neutral-500' />
+          <input
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder='Search substacks…'
+            className='w-full py-2 text-sm outline-none'
+          />
+        </div>
       </div>
-       <h1 className='text-2xl font-semibold text-neutral-800 my-3'>
-                  Top Substacks
-                </h1>
-{/* Substack Slider */}
       {!!top.data!.length && (
-        <section className='flex flex-col gap-4 overflow-x-auto pb-2 scrollbar-hide'>
-          
-
-          <div className='flex flex-row gap-2'>
+        <section className='mb-10 flex flex-col '>
+          <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
+            Top Substacks
+          </h1>
+         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-2 gap-2">
             {top.data!.map(substack => (
-              <div
-                key={substack.id}
-                 className='min-w-[300px]'
-              >
-               <SubstackCard substack={substack}/>
+              <div key={substack.id}>
+                <SubstackCard substack={substack} />
               </div>
             ))}
-          </div>
+            </div>
+          
         </section>
       )}
 
-      </div>
-      
-     
-      
+      {/* All Substacks */}
+      <section>
+        <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
+          All Substacks
+        </h1>
+
+        {!!filteredAll.length ? (
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            {filteredAll.map(substack => (
+              <SubstackCard
+                key={substack.id}
+                substack={substack}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className='py-10 text-center text-sm text-neutral-500'>
+            No substacks match your search
+          </div>
+        )}
+      </section>
     </div>
   )
 }

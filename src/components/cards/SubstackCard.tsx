@@ -6,7 +6,7 @@ import type { SubstackProfile } from '../../features/substacks/substack.types'
 export default function SubstackCard({ substack }: { substack: SubstackProfile }) {
   if (!substack || !substack.admin) {
     return (
-      <div className="flex flex-col gap-3 p-4 bg-white rounded-2xl border text-neutral-500">
+      <div className="flex flex-col gap-3 p-4 bg-white rounded border text-neutral-500">
         Substack data unavailable
       </div>
     )
@@ -15,12 +15,12 @@ export default function SubstackCard({ substack }: { substack: SubstackProfile }
   return (
     <Link
       to={`/substack/${substack.slug}`}
-      className="w-64 h-full flex flex-col gap-3 p-4 bg-white rounded-2xl  hover:shadow-md transition"
+      className="w-full h-full flex flex-col gap-3 p-2 bg-white rounded-2xl shadow-md hover:shadow-xl transition"
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-start gap-2">
         <img
           src={substack.logoUrl || 'https://i.ibb.co/ZR95Wbxg/Talkstack-Logo.png'}
-          className="w-12 h-12 rounded-xl object-cover"
+          className="w-15 h-15 rounded-2xl object-cover"
           alt={substack.name}
           loading='lazy'
         />
@@ -31,10 +31,10 @@ export default function SubstackCard({ substack }: { substack: SubstackProfile }
           </p>
         </div>
       </div>
-
-      <span className="text-xs text-neutral-500">
+      
+      {/* <span className="text-xs  text-neutral-500">
         {substack.subscriberCount} subscribers
-      </span>
+      </span> */}
     </Link>
   )
 }

@@ -9,24 +9,31 @@ const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-neutral-100 flex flex-col">
+    <div className="h-screen bg-neutral-100 overflow-hidden">
       <Navbar onMenuClick={() => setSidebarOpen(v => !v)} />
 
-      <div className="flex flex-1">
-        <Sidebar
-          open={sidebarOpen}
-          onClose={() => setSidebarOpen(false)}
-        />
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
-        <main className="flex-1">
-          <Outlet />
-          <Footer />
-        </main>
-      </div>
+      {/* Scroll container */}
+      <main
+        className="
+          pt-12
+          md:pl-54
+          h-full
+          overflow-y-auto
+        "
+      >
+        <Outlet />
+        <Footer />
+      </main>
 
       <MobileBottomNav />
     </div>
   )
 }
+
 
 export default Layout

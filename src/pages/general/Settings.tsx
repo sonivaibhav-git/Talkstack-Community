@@ -13,7 +13,7 @@ const Settings = () => {
 
       {/* Content */}
       <div className='w-full'>
-        <ul className='divide-y divide-neutral-200 bg-white rounded-xl border border-neutral-200 overflow-hidden'>
+        <ul className='divide-y divide-neutral-200 bg-white  border border-neutral-300 overflow-hidden'>
           {/* Help */}
           <li className='flex items-center gap-3 px-4 py-4 hover:bg-neutral-50 transition'>
             <IoHelpCircleOutline className='h-5 w-5 text-neutral-600' />
@@ -23,8 +23,8 @@ const Settings = () => {
           </li>
 
           {/* Logout */}
-          <li className='flex items-center gap-3 px-4 py-4 hover:bg-red-50 transition'>
-            <IoLogOutOutline className='h-5 w-5 text-red-600' />
+          <li className='flex items-center gap-3 px-4 py-4 hover:bg-purple-50 transition'>
+            <IoLogOutOutline className='h-5 w-5 text-purple-600' />
             <LogoutBtn />
           </li>
         </ul>

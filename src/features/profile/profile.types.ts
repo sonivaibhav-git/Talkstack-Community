@@ -71,3 +71,8 @@ export type PostItem = {
   downvotes: number
   createdAt: string
 }
+
+export type Viewer = {
+  me: boolean
+  following: boolean
+}

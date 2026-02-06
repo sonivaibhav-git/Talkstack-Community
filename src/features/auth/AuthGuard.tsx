@@ -7,7 +7,7 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
   if (loading) {
     return (
       <div style={{ padding: '40px', textAlign: 'center' }}>
-        Checking session…
+        Authenticating
       </div>
     )
   }

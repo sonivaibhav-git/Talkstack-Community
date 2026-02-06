@@ -2,8 +2,14 @@
 @tailwind utilities;
 
 
-.sidebar-link {
-  @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-200;
+/* .sidebar-link {
+  @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-neutral-100 hover:bg-neutral-200;
+} */
+
+html,
+body,
+#root {
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -11,10 +17,12 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
 }
+
 
 @layer utilities {
   .scrollbar-hide {

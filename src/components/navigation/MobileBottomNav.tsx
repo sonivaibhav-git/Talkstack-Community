@@ -15,57 +15,51 @@ type ItemProps = {
   activePath: string
 }
 
-function Item({ to, icon, activePath }: ItemProps) {
+function Item ({ to, icon, activePath }: ItemProps) {
   const active = activePath === to
 
-    const {user} = useAuthContext();
+  const { user } = useAuthContext()
   return (
     <Link
       to={to}
       className={`
         flex items-center justify-center
         p-2 rounded-full transition
-        ${active ? 'bg-red-500 text-white' : 'text-neutral-500'}
+        ${active ? 'bg-purple-500 text-white' : 'text-neutral-500'}
       `}
     >
-      <span className="text-xl">{icon}</span>
-   
-      
-      
+      <span className='text-xl'>{icon}</span>
     </Link>
   )
 }
 
-export default function MobileBottomNav() {
+export default function MobileBottomNav () {
   const { pathname } = useLocation()
 
   return (
-    <nav className="fixed bottom-0 left-0 z-50 w-full md:hidden">
-      <div className="flex justify-between gap-6 border-t-2 border-neutral-300
-                      bg-white px-6 py-1 shadow-lg">
+    <nav className='fixed bottom-0 left-0 z-50 w-full md:hidden'>
+      <div
+        className='flex justify-between gap-6 border-t-2 border-neutral-300
+                      bg-white px-6 py-1 shadow-lg'
+      >
+        <Item to='/' icon={<IoHomeOutline size={24} />} activePath={pathname} />
         <Item
-          to="/"
-          icon={<IoHomeOutline size={24} />}
-          activePath={pathname}
-        />
-        <Item
-          to="/explore"
+          to='/explore'
           icon={<IoCompassOutline size={24} />}
           activePath={pathname}
         />
         <Item
-          to="/posts/create"
+          to='/posts/create'
           icon={<IoCreateOutline size={24} />}
           activePath={pathname}
         />
         <Item
-          to="/posts/trending"
+          to='/posts/trending'
           icon={<IoTrendingUp size={24} />}
           activePath={pathname}
         />
         <Item
-          to="/profile/me"
-          
+          to='/profile/me'
           icon={<IoPersonCircleOutline size={24} />}
           activePath={pathname}
         />

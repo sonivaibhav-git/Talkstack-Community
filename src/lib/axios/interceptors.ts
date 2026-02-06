@@ -75,10 +75,9 @@ export const setupInterceptors = (
         return axiosPrivate(original)
       } catch (err) {
         setToken(null)
+        isRefreshing = false
         queue = []
         return Promise.reject(err)
-      } finally {
-        isRefreshing = false
       }
     }
   )

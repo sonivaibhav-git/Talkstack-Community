@@ -1,6 +1,7 @@
 import { MdOutlineLogout } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../../features/auth/useLogout'
+import { queryClient } from '../../lib/queryClient'
 
 interface LogoutBtnProps {
   onClose?: () => void
@@ -13,6 +14,7 @@ const LogoutBtn = ({ onClose }: LogoutBtnProps) => {
   const handleLogout = () => {
     mutate(undefined, {
       onSettled: () => {
+        queryClient.clear()
         onClose?.()
         navigate('/login', { replace: true })
       }
@@ -23,7 +25,7 @@ const LogoutBtn = ({ onClose }: LogoutBtnProps) => {
     <button
       onClick={handleLogout}
       disabled={isPending}
-      className='flex items-center gap-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition disabled:opacity-60'
+      className='flex w-full items-center gap-2 text-sm font-semibold text-purple-600 hover:bg-purple-50 transition disabled:opacity-60'
     >
       Log out
     </button>

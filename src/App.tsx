@@ -18,7 +18,9 @@ import SubstackProfile from './pages/substack/SubstackProfile'
 import ExploreSubstacks from './pages/substack/ExploreSubstacks'
 import { AuthGuard } from './features/auth/AuthGuard'
 import EditProfile from './pages/profile/EditProfile'
-// import { AuthGuard } from './features/auth/AuthGuard'
+import PostPage from './pages/posts/PostPage'
+import CreatePost from './pages/posts/CreatePost'
+import { AuthProvider } from './context/AuthContext'
 
 export default function App () {
   useAuthSession()
@@ -33,10 +35,13 @@ export default function App () {
           <Route path='/register' element={<Register />} />
 
           {/* App layout */}
-          <Route element={<Layout />}>
+          <Route element={<AuthProvider><Layout /></AuthProvider>}>
             <Route path='/' element={<Home />} />
             <Route path='/profile/me' element={<ProfileMe />} />
             <Route path='/profile/:username' element={<UserProfile />} />
+            <Route path="/posts/:postId" element={<PostPage />} />
+            <Route path="/posts/create" element={<CreatePost />} />
+
 
             <Route
               path='/settings/profile'

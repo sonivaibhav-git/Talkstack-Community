@@ -1,4 +1,4 @@
-import { FaFire } from "react-icons/fa"
+import { FaFire } from 'react-icons/fa'
 
 type Props = {
   trust: number
@@ -20,31 +20,30 @@ export default function TrustCard ({ trust, talkscore }: Props) {
   return (
     <div className='w-full h-fit rounded-2xl bg-neutral-900 p-5 text-white shadow-xl flex flex-row justify-evenly md:gap-10'>
       <div>
-        {' '}
+     
         <div className='text-sm text-neutral-400'>Trust </div>
         <div className=' flex items-baseline gap-2'>
-          <div className='text-4xl font-semibold'>{pct}%</div>
+          <div className='text-3xl font-semibold'>{pct}%</div>
           <span className='rounded-full bg-neutral-800 px-3 py-1 text-xs'>
             {tier}
           </span>
         </div>
         <div className='mt-4 h-1 w-full rounded-full bg-neutral-800 overflow-hidden'>
           <div
-            className='h-full rounded-full bg-gradient-to-r from-lime-400 to-cyan-400 transition-all'
+            className='h-full rounded-full bg-gradient-to-r from-purple-400 via-violet-400 to-violet-800 transition-all'
             style={{ width: `${pct}%` }}
           />
         </div>
       </div>
       <div>
-         <div className='text-sm text-neutral-400'>Talkscore </div>
+        <div className='text-sm text-neutral-400'>Talkscore </div>
         <div className=' flex items-center  gap-2'>
-          <div className='text-4xl font-semibold'>{talkscore}</div>
-          <span className='rounded-full bg-neutral-800 px-3 py-3 text-xs'>
-            <FaFire size={30} className='text-orange-500' />
+          <div className='text-3xl font-semibold'>{talkscore}</div>
+          <span className='rounded-full bg-neutral-800 px-2 py-2 text-xs'>
+            <FaFire size={30} className='text-purple-500' />
           </span>
         </div>
       </div>
-
     </div>
   )
 }

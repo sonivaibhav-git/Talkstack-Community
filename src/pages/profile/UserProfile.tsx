@@ -18,8 +18,8 @@ const ProfileUsername = () => {
   if (isError || !data) return <div>Something went wrong</div>
 
   const { user, stats, viewer } = data
-  console.log(viewer)
 
+  console.log(user)
   return (
     <div className='w-sm md:w-full flex flex-wrap wrap bg-neutral-100 p-2 gap-5'>
       <div className='relative w-fit md:w-fit flex flex-col items-center gap-2 p-2 md:p-3 bg-white rounded-3xl shadow-lg  md:items-center md:gap-3'>
@@ -105,7 +105,11 @@ const ProfileUsername = () => {
                 </button>
               )}
 
-              {viewer.following ? <UnfollowButton username={user.username} /> : <FollowButton username={user.username} />}
+              {viewer.me && viewer.following ? (
+                <UnfollowButton username={user.username} />
+              ) : (
+                <FollowButton username={user.username} />
+              )}
             </div>
           </div>
         </div>
@@ -116,6 +120,28 @@ const ProfileUsername = () => {
         />
       </div>
       {/* <Post data={posts.data ?? []} /> */}
+
+      {/* <div className="mt-1">
+  <h2 className="text-xl font-semibold mb-4 text-neutral-900">
+    Posts
+  </h2>
+
+  {postLoading && (
+    <div className="text-neutral-500">Loading posts…</div>
+  )}
+
+  {!postsLoading && posts?.length === 0 && (
+    <div className="text-neutral-500">
+      No posts in this substack yet.
+    </div>
+  )}
+
+  <div className="flex flex-col w-2/3 gap-6">
+    {posts?.map(post => (
+      <PostCard key={post.id} post={post} />
+    ))}
+  </div>
+</div> */}
     </div>
 
     // <div className='w-full flex justify-between bg-neutral-100 p-2 gap-5'>
@@ -176,7 +202,7 @@ const ProfileUsername = () => {
     //           {/* <div className='p-4 text-center flex flex-row items-center gap-3'>
     //           <div>
     //             {' '}
-    //             <FaFire size={30} className='text-orange-500' />
+    //             <FaFire size={30} className='text-purple-500' />
     //           </div>
     //           <div>
     //             <p className='text-lg font-semibold'>

@@ -44,8 +44,8 @@ export default function Register () {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className=' md:flex flex-col justify-between p-8 bg-gradient-to-br from-red-200 via-red-300 to-red-400'>
-          <div className=' text-center md:text-left text-lg font-semibold text-neutral-800'>
+        <div className=' md:flex flex-col justify-between p-8 bg-gradient-to-br from-purple-200 via-purple-300 to-purple-400'>
+          <div className=' text-center md:text-left text-lg font-bold text-neutral-800 lowercase'>
             TalkStack
           </div>
 
@@ -67,7 +67,7 @@ export default function Register () {
             onSubmit={submit}
             className='w-full max-w-sm flex flex-col gap-5'
           >
-            <h1 className='text-3xl font-bold text-neutral-900'>
+            <h1 className='text-3xl text-center font-bold text-neutral-900'>
               Create Account
             </h1>
 
@@ -89,7 +89,9 @@ export default function Register () {
                 className='w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-900'
               />
               {errors.username && (
-                <span className='text-xs text-red-600'>{errors.username}</span>
+                <span className='text-xs text-purple-600'>
+                  {errors.username}
+                </span>
               )}
             </div>
 
@@ -107,7 +109,7 @@ export default function Register () {
                 className='w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-900'
               />
               {errors.email && (
-                <span className='text-xs text-red-600'>{errors.email}</span>
+                <span className='text-xs text-purple-600'>{errors.email}</span>
               )}
             </div>
 
@@ -138,14 +140,16 @@ export default function Register () {
               </div>
 
               {errors.password && (
-                <span className='text-xs text-red-600'>{errors.password}</span>
+                <span className='text-xs text-purple-600'>
+                  {errors.password}
+                </span>
               )}
             </div>
 
             <button
               type='submit'
               disabled={isPending}
-              className='mt-2 w-full rounded-md btn'
+              className='mt-2 w-full py-2 rounded-md btn'
             >
               {isPending ? 'Creating account…' : 'Register'}
             </button>

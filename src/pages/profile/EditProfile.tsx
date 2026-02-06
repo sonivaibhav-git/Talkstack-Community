@@ -40,7 +40,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className='m-5 bg-white p-6 rounded-xl  shadow'>
+    <div className='m-2 bg-white p-5 rounded-xl  shadow'>
       <h1 className='text-xl font-semibold mb-4'>Edit Profile</h1>
 
       {/* Avatar */}
@@ -50,15 +50,15 @@ const EditProfile = () => {
           isDragActive ? 'border-black' : 'border-neutral-300'
         }`}
       >
-        <input {...getInputProps()} />
+        <input {...getInputProps()}  />
         {avatarPreview ? (
           <img
             src={avatarPreview}
             className='w-48 h-48 mx-auto object-center'
           />
         ) : (
-          <p className='text-sm text-neutral-500'>
-            Drag & drop avatar here, or click to upload
+          <p className='text-sm  text-neutral-500 min-h-40'>
+            Drag & drop avatar here, <br/> or click to upload
           </p>
         )}
       </div>

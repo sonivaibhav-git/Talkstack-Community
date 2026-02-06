@@ -41,8 +41,8 @@ export default function Login () {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className=' md:flex flex-col justify-between p-8 md:bg-gradient-to-br bg-gradient-to-b from-red-200 via-red-300 to-red-400'>
-          <div className='text-center md:text-left text-lg md:text-sm font-semibold text-neutral-800'>
+        <div className=' md:flex flex-col justify-between p-8 md:bg-gradient-to-br bg-gradient-to-b from-purple-200 via-purple-300 to-purple-400'>
+          <div className='text-center md:text-left text-lg md:text-sm font-bold text-neutral-800 lowercase'>
             TalkStack
           </div>
 
@@ -64,7 +64,7 @@ export default function Login () {
             onSubmit={submit}
             className='w-full max-w-sm flex flex-col gap-5'
           >
-            <h1 className='text-3xl font-bold text-neutral-900'>
+            <h1 className='text-3xl text-center font-bold text-neutral-900'>
               Login to Account
             </h1>
 
@@ -86,7 +86,9 @@ export default function Login () {
                 className='w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-900'
               />
               {errors.username && (
-                <span className='text-xs text-red-600'>{errors.username}</span>
+                <span className='text-xs text-purple-600'>
+                  {errors.username}
+                </span>
               )}
             </div>
 
@@ -117,7 +119,9 @@ export default function Login () {
               </div>
 
               {errors.password && (
-                <span className='text-xs text-red-600'>{errors.password}</span>
+                <span className='text-xs text-purple-600'>
+                  {errors.password}
+                </span>
               )}
             </div>
 
@@ -132,7 +136,7 @@ export default function Login () {
             <button
               type='submit'
               disabled={isPending}
-              className='mt-2 w-full rounded-md btn'
+              className='mt-2 py-2 w-full rounded-md btn'
             >
               {isPending ? 'Logging in…' : 'Log In'}
             </button>
@@ -174,10 +178,10 @@ export default function Login () {
                 setErrors(p => ({ ...p, username: '' }))
               }}
               placeholder='Username'
-              className='w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500'
+              className='w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500'
             />
             {errors.username && (
-              <span className='text-xs text-red-600'>{errors.username}</span>
+              <span className='text-xs text-purple-600'>{errors.username}</span>
             )}
           </div>
 
@@ -195,13 +199,13 @@ export default function Login () {
                   setErrors(p => ({ ...p, password: '' }))
                 }}
                 placeholder='Password'
-                className='w-full rounded-md border border-neutral-300 px-3 py-2 pr-16 text-sm outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500'
+                className='w-full rounded-md border border-neutral-300 px-3 py-2 pr-16 text-sm outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500'
               />
 
               <button
                 type='button'
                 onClick={() => setShowPassword(p => !p)}
-                className='absolute right-3 top-1/2 -translate-y-1/2 text-lg font-medium text-red-600 hover:text-red-700 select-none'
+                className='absolute right-3 top-1/2 -translate-y-1/2 text-lg font-medium text-purple-600 hover:text-purple-700 select-none'
               >
                 {showPassword ?
                 <HoverLabel label='Hide' ><IoEyeOffOutline /></HoverLabel> : <HoverLabel label='Show' ><IoEyeOutline /></HoverLabel>}
@@ -209,20 +213,20 @@ export default function Login () {
             </div>
 
             {errors.password && (
-              <span className='text-xs text-red-600'>{errors.password}</span>
+              <span className='text-xs text-purple-600'>{errors.password}</span>
             )}
           </div>
 
           <button
             type='submit'
-            className='mt-2 w-full rounded-full bg-red-500 hover:bg-red-600 active:bg-red-700 text-white text-sm font-semibold py-2.5 transition-colors'
+            className='mt-2 w-full rounded-full bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white text-sm font-semibold py-2.5 transition-colors'
           >
             Log In
           </button>
 
           <p className='text-xs text-neutral-600 text-center'>
             New to Talkstacks?{' '}
-            <Link to='/register' className='text-red-600 hover:underline'>
+            <Link to='/register' className='text-purple-600 hover:underline'>
               Register Here
             </Link>
           </p>

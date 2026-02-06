@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="mt-10 text-center text-xs text-neutral-500">
+    <footer className=" py-2 w-full h-fit bg-purple-400 text-center text-xs text-neutral-900">
       © {new Date().getFullYear()} Talkstack. All rights reserved.
     </footer>
   )
