@@ -4,13 +4,9 @@ import {
   useTopSubstacks
 } from '../../features/substacks/substack.queries'
 import { IoSearchSharp } from 'react-icons/io5'
-import SubstackBlock from '../../components/cards/SubstackBlock'
 import SubstackCard from '../../components/cards/SubstackCard'
-
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
-
-
+import SubBlock from '../../components/cards/SubBlock'
+import Loader from '../../components/skeletons/Loader'
 
 const ExploreSubstacks = () => {
   const [query, setQuery] = useState('')
@@ -28,9 +24,7 @@ const ExploreSubstacks = () => {
 
   if (top.isLoading || all.isLoading) {
     return (
-      <div className='w-full flex justify-center py-10'>
-        <p className='text-sm text-neutral-500'>Loading…</p>
-      </div>
+      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
     )
   }
 
@@ -61,10 +55,10 @@ const ExploreSubstacks = () => {
           <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
             Top Substacks
           </h1>
-         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-2 gap-2">
+         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-2 gap-2">
             {top.data!.map(substack => (
               <div key={substack.id}>
-                <SubstackCard substack={substack} />
+                <SubBlock substack={substack} />
               </div>
             ))}
             </div>

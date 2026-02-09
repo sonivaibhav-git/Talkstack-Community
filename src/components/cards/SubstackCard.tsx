@@ -19,7 +19,7 @@ export default function SubstackCard({ substack }: { substack: SubstackProfile }
     >
       <div className="flex items-start gap-2">
         <img
-          src={substack.logoUrl || 'https://i.ibb.co/ZR95Wbxg/Talkstack-Logo.png'}
+          src={substack.logoUrl || 'https://i.ibb.co/RWgQGVG/Vector.jpg'}
           className="w-15 h-15 rounded-2xl object-cover"
           alt={substack.name}
           loading='lazy'

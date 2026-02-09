@@ -1,12 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import ActionMenu from '../navigation/ActionMenu'
-import Modal from '../base/Modal'
-import List from '../base/List'
+import Modal from '../lists/Modal'
+import List from '../lists/List'
 import TrustCard from './TrustCard'
-
-import type { MyProfile as User, MyStats as Stats} from '../../features/profile/profile.types'
-import type { Query } from '@tanstack/react-query'
+import type { Profile as User, MyStats as Stats} from '../../features/profile/profile.types'
 
 type ProfileCardProps = {
   user: User
@@ -35,7 +33,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
         {/* Avatar */}
         <img
           src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
-          className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-md object-cover'
+          className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-md object-cover bg-linear-to-r from-violet-800 via-violet-400 to-purple-400 p-1'
           loading='lazy'
         />
 

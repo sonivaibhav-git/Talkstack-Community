@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { usePublicProfile } from '../../features/profile/publicProfile.queries'
-import ProfileMeSkeleton from '../../components/skeletons/ProfileMeSkeleton'
 import TrustCard from '../../components/cards/TrustCard'
 import UnfollowButton from '../../components/user/UnfollowButton'
 import FollowButton from '../../components/user/FollowButton'
 import { AiOutlineEdit } from 'react-icons/ai'
 import ActionMenu from '../../components/navigation/ActionMenu'
 import { useState } from 'react'
+import Loader from '../../components/skeletons/Loader'
 
 const ProfileUsername = () => {
   const { username } = useParams<{ username: string }>()
@@ -14,7 +14,9 @@ const ProfileUsername = () => {
   const { data, isLoading, isError } = usePublicProfile(username!)
   const [menuOpen, setMenuOpen] = useState(false)
 
-  if (isLoading) return <ProfileMeSkeleton />
+  if (isLoading) return (
+      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
+    )
   if (isError || !data) return <div>Something went wrong</div>
 
   const { user, stats, viewer } = data

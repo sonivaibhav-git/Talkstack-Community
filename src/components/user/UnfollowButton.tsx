@@ -1,6 +1,5 @@
-// components/profile/UnfollowButton.tsx
+
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'react-toastify'
 import { unfollowUserApi } from '../../api/user.api'
 import { publicProfileKeys } from '../../features/profile/publicProfile.queries'
 

@@ -1,6 +1,4 @@
-// components/profile/FollowButton.tsx
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'react-toastify'
 import { followUserApi } from '../../api/user.api'
 import { publicProfileKeys } from '../../features/profile/publicProfile.queries'
 

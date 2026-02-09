@@ -1,7 +1,7 @@
 export type PostAuthor = {
   id: string
   username: string
-  avatar: string | undefined
+  avatar?: string
 }
 
 export type Post = {
@@ -20,7 +20,7 @@ export type SubstackPost = {
   id: string
   title: string
   substackSlug: string
-  imageUrl: string | undefined
+  imageUrl?: string
   authorDto: PostAuthor
   voteScore: number
   upvotes: number
@@ -28,13 +28,12 @@ export type SubstackPost = {
   createdAt: string
 }
 
-
 export type CreatePostPayload = {
   title: string
   content: string
   substackSlug: string
   publishNow: boolean
-  image?: File | null
+  image?: File
 }
 
 export type CreatePostResponse = {

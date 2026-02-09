@@ -1,13 +1,14 @@
 import { useAuthContext } from '../context/AuthContext'
 
 const Home: React.FC = () => {
-  const { user } = useAuthContext()
+  const { user } = useAuthContext() 
+
   return (
     <section className='w-full px-4 sm:px-6 py-8'>
       <div className='w-full'>
         <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-900'>
           Welcome{' '}
-          <span className='text-purple-500 uppercase'>{user?.displayName}</span>{' '}
+          <span className='text-purple-600 uppercase'>{user?.displayName}</span>{' '}
           to TalkStack
         </h1>
 

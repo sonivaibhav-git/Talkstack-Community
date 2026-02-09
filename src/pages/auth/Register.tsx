@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { motion } from 'framer-motion'
 import { useRegister } from '../../features/auth/useRegister'
@@ -37,17 +36,18 @@ export default function Register () {
   }
 
   return (
-    <div className='h-screen w-full flex items-center justify-center bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-400 p-4'>
+    <div className='h-screen w-full flex items-center justify-center bg-linear-to-br from-neutral-200 via-neutral-300 to-neutral-400 p-4'>
       <motion.div
         className='w-100 md:w-full h-fit md:h-full bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2'
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <div className=' md:flex flex-col justify-between p-8 bg-gradient-to-br from-purple-200 via-purple-300 to-purple-400'>
-          <div className=' text-center md:text-left text-lg font-bold text-neutral-800 lowercase'>
-            TalkStack
-          </div>
+        <div className=' hidden md:flex flex-col justify-between p-8 bg-linear-to-br from-purple-200 via-purple-300 to-purple-400'>
+          <img
+            className='w-10 rounded-xl'
+            src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+          />
 
           <div>
             <p className='hidden md:flex text-sm text-neutral-700 mb-2'>
@@ -62,18 +62,18 @@ export default function Register () {
           <div />
         </div>
 
-        <div className='flex items-center justify-center p-6 sm:p-10'>
+        <div className='flex flex-col gap-2 items-center justify-center p-6 sm:p-10'>
           <form
             onSubmit={submit}
             className='w-full max-w-sm flex flex-col gap-5'
           >
+            <img
+              className='md:hidden w-10 self-center rounded-xl'
+              src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+            />
             <h1 className='text-3xl text-center font-bold text-neutral-900'>
               Create Account
             </h1>
-
-            <p className='text-sm text-neutral-500'>
-              Get started with TalkStack in under a minute.
-            </p>
 
             <div className='flex flex-col gap-1'>
               <label className='text-sm font-medium text-neutral-700'>
@@ -158,12 +158,27 @@ export default function Register () {
               Already have an account?{' '}
               <Link
                 to='/login'
-                className='text-neutral-900 font-medium hover:underline'
+                className='text-purple-500 font-medium hover:underline'
               >
                 Log in
               </Link>
             </p>
           </form>
+          {/* <p className='text-sm text-neutral-600 flex flex-row w-full items-center'>
+            {' '}
+            <hr className='w-full' />
+            <span className='px-2 '>or </span> <hr className='w-full' />
+          </p>
+          <div className='max-w-sm flex flex-col justify-center gap-5'>
+            <button className='shadow-lg hover:shadow-xl border border-neutral-200 px-4 py-2 w-fit text-sm flex items-center gap-5 bg-neutral-200'>
+              {' '}
+              <img
+                className='w-4 h-4 object-cover'
+                src='https://i.ibb.co/dwrxRtJ7/image-removebg-preview.png'
+              />{' '}
+              SignUp with Google
+            </button>
+          </div> */}
         </div>
       </motion.div>
     </div>

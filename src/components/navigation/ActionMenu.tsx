@@ -31,21 +31,19 @@ export default function ActionMenu ({ open, onClose }: ActionMenuProps) {
         '
       >
         <MenuLink to='/share' icon={<IoShareSocial />} label='Share' />
-        <MenuLink
+        {/* <MenuLink
           to='/group'
           icon={<IoPeopleOutline />}
           label='Start a group chat'
-        />
-        <MenuLink
+        /> */}
+        {/* <MenuLink
           to='/move'
           icon={<IoFolderOutline />}
           label='Move to project'
-        />
-
-        <MenuButton icon={<IoPinOutline />} label='Pin chat' />
+        /> */}
         <MenuButton icon={<IoArchiveOutline />} label='Archive' />
 
-        <MenuLink to='/report' icon={<IoFlagOutline />} label='Report' />
+        <MenuLink to='/block' icon={<IoFlagOutline />} label='Block' />
 
         <MenuButton icon={<IoTrashOutline />} label='Delete' danger />
       </div>
@@ -85,7 +83,7 @@ function itemClass (danger?: boolean) {
     text-left transition
     ${
       danger
-        ? 'text-purple-400 hover:bg-purple-900/30'
+        ? 'text-red-400 hover:bg-red-900/30'
         : 'text-neutral-200 hover:bg-neutral-700'
     }
   `

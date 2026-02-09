@@ -1,5 +1,10 @@
-import type { CreatePostPayload, CreatePostResponse, Post, SubstackPost} from "../features/posts/post.types"
-import { axiosPrivate } from "../lib/axios/axiosPrivate"
+import type {
+  CreatePostPayload,
+  CreatePostResponse,
+  Post,
+  SubstackPost
+} from '../features/posts/post.types'
+import { axiosPrivate } from '../lib/axios/axiosPrivate'
 
 export const getPostById = async (postId: string): Promise<Post | null> => {
   try {
@@ -9,8 +14,6 @@ export const getPostById = async (postId: string): Promise<Post | null> => {
     return null
   }
 }
-
-
 
 export const getSubstackPostsApi = async (slug: string) => {
   const res = await axiosPrivate.get<SubstackPost[]>(

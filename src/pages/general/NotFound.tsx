@@ -4,7 +4,7 @@ const NotFound: React.FC = () => {
   return (
     <section className='w-full px-4 sm:px-6 py-16'>
       <div className='max-w-md mx-auto flex flex-col items-center text-center gap-4'>
-        <h1 className='text-6xl sm:text-7xl md:text-8xl font-extrabold  text-purple-500'>
+        <h1 className='text-6xl sm:text-7xl md:text-8xl font-extrabold  text-purple-600'>
           404
         </h1>
 

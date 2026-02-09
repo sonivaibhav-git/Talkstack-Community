@@ -17,15 +17,13 @@ type ItemProps = {
 
 function Item ({ to, icon, activePath }: ItemProps) {
   const active = activePath === to
-
-  const { user } = useAuthContext()
   return (
     <Link
       to={to}
       className={`
         flex items-center justify-center
         p-2 rounded-full transition
-        ${active ? 'bg-purple-500 text-white' : 'text-neutral-500'}
+        ${active ? 'bg-purple-600 text-white' : 'text-neutral-500'}
       `}
     >
       <span className='text-xl'>{icon}</span>

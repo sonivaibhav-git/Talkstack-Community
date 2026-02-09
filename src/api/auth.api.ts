@@ -19,6 +19,3 @@ export const logoutApi = () =>
 
 export const refreshApi = () =>
   axiosPublic.get('/auth/refresh')
-
-// export const meApi = () =>
-//   axiosPublic.get('/auth/me')

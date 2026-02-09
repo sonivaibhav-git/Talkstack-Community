@@ -1,4 +1,3 @@
-
 import type { Comment, PaginatedResponse } from '../features/profile/comment.types'
 import { axiosPrivate } from '../lib/axios/axiosPrivate'
 

@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import type {
   FollowingItem,
   FollowingType
@@ -6,6 +5,7 @@ import type {
 import type { UseQueryResult } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { IoCloseSharp } from 'react-icons/io5'
+import { useState } from 'react'
 
 interface ListProps {
   query: UseQueryResult<FollowingItem[], Error>
@@ -30,7 +30,7 @@ function List ({
     <div
       className='
   relative
-  w-[90vw] md:w-[420px]
+  w-[90vw] md:w-105
   max-h-96
   bg-white
   shadow-2xl

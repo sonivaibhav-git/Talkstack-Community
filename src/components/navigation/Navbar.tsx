@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
-import { useAuthContext } from '../../context/AuthContext'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { ProfileSkeleton } from '../skeletons/ProfileSkeleton'
 
 interface NavbarProps {
   onMenuClick: () => void
@@ -12,8 +10,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { user } = useAuthContext()
-  console.log(user)
+ 
 
   const handleMenuToggle = () => {
     setMenuOpen(v => !v)
@@ -40,30 +37,13 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
         {/* Logo */}
         <Link
           to='/'
-          className='flex items-center text-2xl font-bold  lowercase'
+          className='flex items-center gap-1 text-2xl text-purple-500 font-bold  lowercase border-r-2 border-neutral-400'
         >
-          <span className='text-purple-500'>Talk</span>Stack
+             {/* <img className='w-6 self-center rounded-lg' src="https://i.ibb.co/RWgQGVG/Vector.jpg" /> */}
+             talkstack
         </Link>
 
-        {/* Profile */}
-        {user === undefined && <ProfileSkeleton />}
-
-        {user && (
-          <Link
-            to='/profile/me'
-            className='hidden md:flex items-center gap-2 hover:shadow-md border border-neutral-400 rounded-full p-1 pr-2'
-          >
-            <img
-              src={user.avatarUrl}
-              alt={user.username}
-              className='w-8 h-8 rounded-full border border-neutral-300 object-cover'
-              loading='lazy'
-            />
-            <span className='text-sm font-medium text-neutral-800'>
-              {user.displayName}
-            </span>
-          </Link>
-        )}
+        
         {/* 
         {!user && user !== undefined && (
           <Link to='/login' className='btn'>
@@ -71,6 +51,8 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
           </Link>
         )} */}
       </div>
+
+     
     </nav>
   )
 }

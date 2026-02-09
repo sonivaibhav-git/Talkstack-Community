@@ -10,7 +10,7 @@ function SubstackProfileCard ({ data }: Props) {
   const navigate = useNavigate()
   return (
     <div
-    className='w-full
+      className='w-full
     h-fit
     rounded-xl
     col-span-2
@@ -23,7 +23,7 @@ function SubstackProfileCard ({ data }: Props) {
     >
       {/* Banner */}
       {data.bannerUrl && (
-        <div className='w-full h-48 bg-neutral-100'>
+        <div className='w-full h-48 purple-500'>
           <img
             src={data.bannerUrl}
             className='w-full h-full object-cover'
@@ -37,14 +37,14 @@ function SubstackProfileCard ({ data }: Props) {
         {/* Logo */}
         <div className='flex flex-row gap-2'>
           <img
-            src={data.logoUrl || 'https://i.ibb.co/ZR95Wbxg/Talkstack-Logo.png'}
-            className='w-24 h-24 rounded-xl border-4 border-white object-cover shadow-md'
+            src={data.logoUrl || 'https://i.ibb.co/RWgQGVG/Vector.jpg'}
+            className='w-24 h-24 rounded-3xl border-4 border-white object-cover shadow-md'
             loading='lazy'
           />
           <div>
             {' '}
             <h1 className='text-2xl font-bold text-neutral-900'>{data.name}</h1>
-            <p className='text-sm text-neutral-500'>s/{data.slug}</p>
+            <p className='text-sm text-neutral-500'>s/ {data.slug}</p>
           </div>
         </div>
 
@@ -68,10 +68,10 @@ function SubstackProfileCard ({ data }: Props) {
           <div className='flex flex-col items-center'>
             <Link
               to={`/profile/${data.admin.username}`}
-              className='font-medium  hover:underline'
+              className='font-medium text-neutral-900 hover:text-purple-500'
             >
               u/
-              <span className='text-neutral-900'> {data.admin.username}</span>
+              <span > {data.admin.username}</span>
             </Link>
             Admin{' '}
           </div>

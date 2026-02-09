@@ -5,14 +5,15 @@ import NotFound from '../general/NotFound'
 import { useSubstackPosts } from '../../features/posts/post.queries'
 import PostCard from '../../components/cards/PostCard'
 import SubstackProfileCard from '../../components/cards/SubstackProfileCard'
+import Loader from '../../components/skeletons/Loader'
 
 const SubstackProfileInner = () => {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, error } = useSubstackProfile(slug!)
   const { data: posts, isLoading: postsLoading } = useSubstackPosts(slug!)
   if (isLoading)
-    return (
-      <div className='p-6 text-center text-neutral-500'>Loading substack…</div>
+     return (
+      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
     )
   if (error) {
     const err = error as AxiosError
@@ -32,7 +33,8 @@ const SubstackProfileInner = () => {
     )
   }
   {
-    postsLoading && <div className='text-neutral-500'>Loading posts…</div>
+    postsLoading && 
+      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
   }
 
   {
@@ -41,7 +43,7 @@ const SubstackProfileInner = () => {
     )
   }
   return (
-  <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 p-2 bg-neutral-300'>
+  <div className='w-full h-full grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 p-2 bg-neutral-200'>
     {/* Profile Section */}
     <div className='order-1 md:order-2'>
       <SubstackProfileCard data={data} />

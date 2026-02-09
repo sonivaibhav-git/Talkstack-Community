@@ -1,14 +1,16 @@
 import { useParams, Link } from 'react-router-dom'
 import { IoMdTrendingUp } from 'react-icons/io'
-// import VoteButtons from '../../components/buttons/VoteButtons'
 import { usePost } from '../../features/posts/post.queries'
 import CommentsSection from '../../components/posts/CommentsSection'
+import Loader from '../../components/skeletons/Loader'
 
 const PostPage = () => {
   const { postId } = useParams<{ postId: string }>()
   const { data: post, isLoading, isError } = usePost(postId!)
 
-  if (isLoading) return <div className='p-6'>Loading post…</div>
+  if (isLoading)  return (
+      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
+    )
   if (isError || post == null) return <div className='p-6'>Post not found</div>
 
   return (
