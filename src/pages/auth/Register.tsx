@@ -28,10 +28,10 @@ export default function Register () {
     if (!validate()) return
     try {
       await mutateAsync({ username, email, password })
-      toast.success('Account created')
+      console.log('Account created')
       navigate('/')
     } catch {
-      toast.error('Registration failed')
+      console.error('Registration failed')
     }
   }
 
