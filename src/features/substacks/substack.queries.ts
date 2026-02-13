@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
-import type { SubstackProfile } from './substack.types'
-import { getAllSubstacksApi, getSubstackBySlugApi, getTopSubstacksApi } from '../../api/substack.api'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import type { EditSubstackPayload, SubstackProfile } from './substack.types'
+import { editSubstack, getAllSubstacksApi, getSubstackBySlugApi, getTopSubstacksApi } from '../../api/substack.api'
 
 
 export const useSubstackProfile = (slug: string) =>
@@ -21,4 +21,12 @@ export const useTopSubstacks = () =>
   useQuery<SubstackProfile[]>({
     queryKey: ['substacks', 'top'],
     queryFn: async () => (await getTopSubstacksApi()).data
+  })
+
+
+
+export const useEditSubstack = (slug: string) =>
+  useMutation({
+    mutationFn: (payload: EditSubstackPayload) =>
+      editSubstack(slug, payload)
   })

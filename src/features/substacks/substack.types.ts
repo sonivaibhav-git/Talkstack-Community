@@ -22,3 +22,9 @@ export type SubstackProfile = {
   bannerUrl: string
   viewer: SubstackViewer
 }
+export interface EditSubstackPayload {
+  name: string
+  description: string
+  logoUrl?: string
+  bannerUrl?: string
+}

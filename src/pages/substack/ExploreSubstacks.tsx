@@ -37,7 +37,7 @@ const ExploreSubstacks = () => {
   }
 
   return (
-    <div className='w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4'>
+    <div className='w-full max-w-7xl mx-auto  sm:px-6 py-4 '>
       {/* Search */}
       <div className='mb-6'>
         <div className='flex items-center gap-2 bg-white border rounded-lg px-3'>
@@ -55,9 +55,9 @@ const ExploreSubstacks = () => {
           <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
             Top Substacks
           </h1>
-         <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-2 gap-2">
+         <div className="grid grid-cols-2 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-2 gap-2">
             {top.data!.map(substack => (
-              <div key={substack.id}>
+              <div key={substack.id} className=''>
                 <SubBlock substack={substack} />
               </div>
             ))}

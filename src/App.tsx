@@ -19,6 +19,7 @@ import CreatePost from './pages/posts/CreatePost'
 import { AuthProvider } from './context/AuthContext'
 import { AuthGuard } from './features/auth/AuthGuard'
 import { useAuthSession } from './features/auth/useAuthSession'
+import EditSubstackProfile from './pages/substack/EditSubstackProfile'
 
 function AppInner () {
   useAuthSession()
@@ -46,6 +47,9 @@ function AppInner () {
               </AuthGuard>
             }
           />
+          <Route path='/substacks/:slug/edit' element={
+            <AuthGuard><EditSubstackProfile /></AuthGuard>} />
+
 
           <Route path='/substack/:slug' element={<SubstackProfile />} />
           <Route path='/explore' element={<ExploreSubstacks />} />

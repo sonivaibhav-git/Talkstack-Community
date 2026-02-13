@@ -9,7 +9,6 @@ import {
 } from 'react-icons/io5'
 import { GoCommentDiscussion } from 'react-icons/go'
 import type { ReactNode } from 'react'
-import { useAuthContext } from '../../context/AuthContext'
 import LogoutBtn from '../buttons/Logout'
 
 type SidebarProps = {
@@ -19,8 +18,7 @@ type SidebarProps = {
 
 export default function Sidebar ({ open }: SidebarProps) {
 
-   const { user } = useAuthContext()
-  console.log(user)
+  
   return (
     <>
       {/* Mobile backdrop */}
@@ -67,28 +65,8 @@ export default function Sidebar ({ open }: SidebarProps) {
             </div>
 
 
-            <div className=' w-full flex items-end '>{user && (
-              
-          <Link
-            to='/profile/me'
-            className=' w-full flex flex-col gap-0 p-2'
-          >
-            <p className='text-neutral-500'>Profile</p>
-            <div className='hidden md:flex btn rounded-b-none py-3 w-full justify-between '>
-              <img
-              src={user.avatarUrl}
-              alt={user.username}
-              className='w-8 h-8 rounded-lg  object-cover self-start'
-              loading='lazy'
-            />
-            <span className='text-sm font-semibold '>
-              {user.displayName}
-            </span>
-            </div>
-            <LogoutBtn/>
-          </Link>
-        )}</div>
-            
+           
+               <LogoutBtn/>
           </div>
         </nav>
          

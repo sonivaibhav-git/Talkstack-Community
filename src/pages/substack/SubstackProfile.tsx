@@ -11,6 +11,7 @@ const SubstackProfileInner = () => {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, error } = useSubstackProfile(slug!)
   const { data: posts, isLoading: postsLoading } = useSubstackPosts(slug!)
+  console.log(data)
   if (isLoading)
      return (
       <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
@@ -43,14 +44,14 @@ const SubstackProfileInner = () => {
     )
   }
   return (
-  <div className='w-full h-full grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2 p-2 bg-neutral-200'>
+  <div className='w-full h-full grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-2  bg-neutral-200'>
     {/* Profile Section */}
     <div className='order-1 md:order-2'>
       <SubstackProfileCard data={data} />
     </div>
 
     {/* Posts Section */}
-    <div className='order-2 md:order-1 md:col-span-2'>
+    <div className='order-2 md:order-1 md:col-span-2 p-2'>
       <div className='flex flex-col w-full h-fit gap-2 mb-5'>
         {posts?.map(post => (
           <PostCard key={post.id} post={post} />

@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import {
- 
-  IoPeopleOutline,
-  IoFolderOutline,
-  IoPinOutline,
   IoArchiveOutline,
   IoFlagOutline,
   IoTrashOutline,
@@ -23,7 +19,6 @@ export default function ActionMenu ({ open, onClose }: ActionMenuProps) {
     <>
       {/* Backdrop */}
       <div className='fixed inset-0 z-40' onClick={onClose} />
-
       <div
         className='
           absolute right-0 top-10 z-50 mt-2 w-64
@@ -31,20 +26,8 @@ export default function ActionMenu ({ open, onClose }: ActionMenuProps) {
         '
       >
         <MenuLink to='/share' icon={<IoShareSocial />} label='Share' />
-        {/* <MenuLink
-          to='/group'
-          icon={<IoPeopleOutline />}
-          label='Start a group chat'
-        /> */}
-        {/* <MenuLink
-          to='/move'
-          icon={<IoFolderOutline />}
-          label='Move to project'
-        /> */}
         <MenuButton icon={<IoArchiveOutline />} label='Archive' />
-
         <MenuLink to='/block' icon={<IoFlagOutline />} label='Block' />
-
         <MenuButton icon={<IoTrashOutline />} label='Delete' danger />
       </div>
     </>

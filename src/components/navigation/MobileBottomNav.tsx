@@ -7,7 +7,6 @@ import {
   IoPersonCircleOutline
 } from 'react-icons/io5'
 import type { ReactNode } from 'react'
-import { useAuthContext } from '../../context/AuthContext'
 
 type ItemProps = {
   to: string

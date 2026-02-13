@@ -1,3 +1,4 @@
+import type { EditSubstackPayload } from "../features/substacks/substack.types"
 import { axiosPrivate } from "../lib/axios/axiosPrivate"
 
 export const getSubstackBySlugApi = (slug: string) =>
@@ -9,6 +10,10 @@ export const getAllSubstacksApi = () =>
 
 export const getTopSubstacksApi = () =>
   axiosPrivate.get('/substacks/top')
+
+
+export const editSubstack = (slug: string, payload: EditSubstackPayload) =>
+  axiosPrivate.put(`/substacks/edit/${slug}`, payload)
 
 
 export const followSubstackApi = (slug: string) =>
