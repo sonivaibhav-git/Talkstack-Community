@@ -165,22 +165,7 @@ export default function Register () {
               </Link>
             </p>
           </form>
-          {/* <p className='text-sm text-neutral-600 flex flex-row w-full items-center'>
-            {' '}
-            <hr className='w-full' />
-            <span className='px-2 '>or </span> <hr className='w-full' />
-          </p>
-          <div className='max-w-sm flex flex-col justify-center gap-5'>
-            <button className='shadow-lg hover:shadow-xl border border-neutral-200 px-4 py-2 w-fit text-sm flex items-center gap-5 bg-neutral-200'>
-              {' '}
-              <img
-                className='w-4 h-4 object-cover'
-                src='https://i.ibb.co/dwrxRtJ7/image-removebg-preview.png'
-                loading= "lazy"
-              />{' '}
-              SignUp with Google
-            </button>
-          </div> */}
+          
         </div>
       </motion.div>
     </div>

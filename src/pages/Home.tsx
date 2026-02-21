@@ -5,8 +5,6 @@ import { useInView } from 'react-intersection-observer';
 import { useInfiniteHomeFeed } from '../features/posts/post.queries'; // adjust path if needed
 import PostCard from '../components/cards/PostCard';
 import Loader from '../components/skeletons/Loader';
-import { useAuthContext } from '../context/AuthContext';
-
 export default function Home() {
 
 
@@ -79,7 +77,8 @@ export default function Home() {
 
         {/* Loading state */}
         {isLoading ? (
-          <Loader />
+          <div className="w-full h-full"><Loader /></div>
+          
         ) : isError ? (
           <div className="min-h-[50vh] flex flex-col items-center justify-center gap-4 px-5 text-center">
             <h2 className="text-2xl font-semibold text-red-600">Couldn't load posts</h2>
