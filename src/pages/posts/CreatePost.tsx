@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCreatePost } from '../../features/posts/post.queries'
 import type { CreatePostPayload } from '../../features/posts/post.types'
@@ -8,15 +8,21 @@ type Mode = 'text' | 'image' | 'link'
 const CreatePost = () => {
   const navigate = useNavigate()
   const { mutateAsync, isPending } = useCreatePost()
-
   const [mode, setMode] = useState<Mode>('text')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [externalLink, setExternalLink] = useState('')
   const [image, setImage] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [substackSlug, setSubstackSlug] = useState('')
   const [publishNow, setPublishNow] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) URL.revokeObjectURL(imagePreview)
+    }
+  }, [imagePreview])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -64,10 +70,8 @@ const CreatePost = () => {
   }
 
   return (
-    <div className='max-w-6xl h-full mx-auto p-6 bg-neutral-300 text-neutral-800 flex-1'>
+    <div className='max-w-7xl mx-auto p-6 bg-neutral-100 text-neutral-800 flex-1'>
       <h1 className='text-2xl font-semibold mb-4'>Create post</h1>
-
-      <hr className='w-full h-px mb-4 bg-neutral-400' />
 
       <div className='flex gap-4 mb-6'>
         {(['text', 'image', 'link'] as Mode[]).map(t => (
@@ -75,7 +79,7 @@ const CreatePost = () => {
             key={t}
             type='button'
             onClick={() => setMode(t)}
-            className={`px-4 py-1 border-b-2 transition ${
+            className={`px-4 py-1 border-b-2 ${
               mode === t
                 ? 'border-purple-600 text-purple-600'
                 : 'border-transparent text-neutral-600 hover:border-purple-400'
@@ -103,21 +107,48 @@ const CreatePost = () => {
           className='w-full rounded-lg border px-4 py-2 bg-transparent'
         />
 
+        {mode === 'image' && (
+          <label
+            className='relative w-full h-64 border-2 border-dashed border-neutral-500 rounded-lg cursor-pointer overflow-hidden flex items-center justify-center bg-neutral-50 hover:border-purple-500 transition'
+          >
+            <input
+              type='file'
+              accept='image/*'
+              className='hidden w-fit'
+              onChange={e => {
+                const file = e.target.files?.[0] || null
+                setImage(file)
+
+                if (file) {
+                  const url = URL.createObjectURL(file)
+                  setImagePreview(url)
+                } else {
+                  setImagePreview(null)
+                }
+              }}
+            />
+
+            {imagePreview ? (
+              <img
+                src={imagePreview}
+                alt='Preview'
+                className='absolute inset-0 w-fit h-fit object-cover'
+                loading='lazy'
+              />
+            ) : (
+              <span className='text-neutral-600 text-sm'>
+                Click or drop an image
+              </span>
+            )}
+          </label>
+        )}
+
         {mode === 'text' && (
           <textarea
             value={content}
             onChange={e => setContent(e.target.value)}
             placeholder='Write your post...'
             className='w-full h-40 rounded-lg border px-4 py-2 bg-transparent resize-none'
-          />
-        )}
-
-        {mode === 'image' && (
-          <input
-            type='file'
-            accept='image/*'
-            onChange={e => setImage(e.target.files?.[0] || null)}
-            className='w-full border border-dashed border-neutral-700 p-4'
           />
         )}
 
@@ -140,12 +171,6 @@ const CreatePost = () => {
             />
             <span className='text-sm'>Publish</span>
           </label>
-
-          {!publishNow && (
-            <span className='text-xs text-neutral-600'>
-              Saved as draft
-            </span>
-          )}
         </div>
 
         <button disabled={isPending} className='btn'>

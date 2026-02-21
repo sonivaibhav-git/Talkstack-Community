@@ -2,7 +2,8 @@ import type {
   CreatePostPayload,
   CreatePostResponse,
   Post,
-  SubstackPost
+  SubstackPost,
+  UnifiedPost
 } from '../features/posts/post.types'
 import { axiosPrivate } from '../lib/axios/axiosPrivate'
 
@@ -48,3 +49,20 @@ export const createPostApi = async (
 
   return res.data
 }
+
+
+export const getPersonalFeed = async (params: {
+  cursor?: string;
+  limit?: number;
+}): Promise<UnifiedPost[]> => {
+  const res = await axiosPrivate.get<UnifiedPost[]>('/users/me/feed', { params });
+  return res.data;
+};
+
+export const getRandomPosts = async (params: {
+  cursor?: string;
+  limit?: number;
+}): Promise<UnifiedPost[]> => {
+  const res = await axiosPrivate.get<UnifiedPost[]>('/users/me/randompost', { params });
+  return res.data;
+};

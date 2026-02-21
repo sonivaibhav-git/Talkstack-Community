@@ -14,8 +14,8 @@ const PostPage = () => {
   if (isError || post == null) return <div className='p-6'>Post not found</div>
 
   return (
-    <div className=' md:w-full flex flex-col items-center md:flex-row'>
-      <div className='w-full text-neutral-800 flex flex-col md:flex-row gap-3 justify-between '>
+    <div className=' md:w-full flex flex-col items-center md:flex-row h-full'>
+      <div className='w-full h-full text-neutral-800 flex flex-col md:flex-row gap-3 justify-between '>
         {post.imageUrl && ( <div className='relative w-full flex flex-col gap-3'>
          
             <div className='relative w-full  overflow-hidden shadow-md'>
@@ -24,6 +24,7 @@ const PostPage = () => {
                 src={post.imageUrl}
                 alt={post.title}
                 className='inset-0 w-fit h-fit object-cover'
+                loading='lazy'
               />
 
               {/* Badge */}
@@ -43,7 +44,9 @@ const PostPage = () => {
               src={
                 post.author.avatar ||
                 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'
+                
               }
+              loading='lazy'
               className='w-6 h-6 rounded-full object-cover'
             />
 

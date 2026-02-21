@@ -12,7 +12,6 @@ import Loader from '../../components/skeletons/Loader'
 
 const ProfileMe = () => {
   refreshApi()
-
   const profile = useMyProfile()
   const stats = useMyStats()
   const posts = useMyPosts()
@@ -39,26 +38,26 @@ const ProfileMe = () => {
   ) {
     return <div>Something went wrong</div>
   }
+  console.log(posts);
 
   return (
-    <div className='w-full grid sm:grid-col-1 md:grid-cols-3 gap-5 md:gap-2 p-2'>
-      <div className='col-span-2 order-2 md:order-1'>
-        <div className='flex flex-col w-full h-fit gap-2'>
-          {posts.data?.length
-            ? posts.data.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))
-            : <p>No posts to show</p>}
-        </div>
-      </div>
+    <div className='w-full grid grid-row-2 gap-5 md:gap-2 p-2'>
+      <div className='w-full col-span-1 order-1'>
 
-      <div className='w-full col-span-1 order-1 md:order-2'>
         <Profilecard
           user={profile.data}
           stats={stats.data}
           query={query}
         />
       </div>
+        <div className=' order-2 w-full h-fit gap-2 flex flex-col gap-2 '>
+          {posts.data?.length
+            ? posts.data.map(post => (
+                <PostCard key={post.id} post={post} />
+              ))
+            : <p>No posts to show</p>}
+        
+        </div>
     </div>
   )
 }

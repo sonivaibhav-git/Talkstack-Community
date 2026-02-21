@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { motion } from 'framer-motion'
 import { useLogin } from '../../features/auth/useLogin'
@@ -34,7 +33,7 @@ export default function Login () {
 
     try {
       await mutateAsync({ username, password })
-      toast.success('Logged in')
+      console.log('Logged in')
       navigate('/')
     } catch (err: any) {
       const message =
@@ -43,7 +42,7 @@ export default function Login () {
         'Invalid credentials'
 
       setFormError(message)
-      toast.error(message)
+      console.error(message)
     }
   }
 
@@ -60,6 +59,7 @@ export default function Login () {
           <img
             className='w-10 rounded-xl'
             src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+            loading='lazy'
           />
 
           <div>
@@ -86,13 +86,13 @@ export default function Login () {
             <img
               className='md:hidden w-10 self-center rounded-xl'
               src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+              loading='lazy'
             />
 
             <h1 className='text-3xl text-center font-bold text-neutral-800'>
               Login to Account
             </h1>
 
-            {/* 🔴 ERROR NOTIFICATION BOARD */}
             {formError && (
               <div className='w-full rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700'>
                 {formError}
@@ -156,7 +156,7 @@ export default function Login () {
 
             <p className='text-xs text-neutral-600 text-center'>
               <Link
-                to='/'
+                to='/forgot-password'
                 className='text-purple-500 font-medium hover:underline'
               >
                 Forgot Password?

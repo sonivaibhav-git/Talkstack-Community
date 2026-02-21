@@ -54,6 +54,7 @@ const EditProfile = () => {
           <img
             src={avatarPreview}
             className='w-48 h-48 mx-auto object-center'
+            loading='lazy'
           />
         ) : (
           <p className='text-sm  text-neutral-500 min-h-40'>

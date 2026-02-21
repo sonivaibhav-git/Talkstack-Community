@@ -1,60 +1,133 @@
 import { Link } from 'react-router-dom'
 import type { SubstackPost } from '../../features/posts/post.types'
 import VoteButtons from '../buttons/VoteButtons'
-import { VscCommentDiscussion } from "react-icons/vsc";
-
-
+import { VscCommentDiscussion } from 'react-icons/vsc'
+import { useAuthContext } from '../../context/AuthContext'
+import { useState } from 'react'
 
 type Props = {
   post: SubstackPost
 }
 
 const PostCard = ({ post }: Props) => {
+  const { user } = useAuthContext()
+  if (!user) {
+    return null 
+  }
+
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const contentWords = post.content?.trim().split(/\s+/) || []
+  const wordLimit = 20
+  const isLongContent = contentWords.length > wordLimit
+
+  const displayContent = isLongContent && !isExpanded
+    ? contentWords.slice(0, wordLimit).join(' ') + '...'
+    : post.content?.trim() || ''
+
   return (
-    <div className="group w-full h-1/2 rounded-xl bg-white overflow-hidden hover:shadow-md transition p-2"><Link
-      to={`/posts/${post.id}`}
-      
-    >
-      <div className="flex flex-col items-start gap-2 text-sm text-neutral-500  p-2">
-        <div className="flex flex-row gap-2">
-          
-         <Link
+    <div className="relative group w-full h-fit rounded-3xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300">
+      <Link to={`/posts/${post.id}`} className="">
+        {/* Header */}
+        <div className="flex w-full flex-col items-start gap-2 p-4 bg-white/70 backdrop-blur-md">
+          <div className="flex flex-row sm:justify-between md:justify-start gap-2 w-full items-center">
+            {post.authorDto ? (
+              <Link
                 to={`/profile/${post.authorDto.username}`}
-                className='hover:underline flex flex-row gap-2'
+                className="hover:underline flex flex-row gap-2 items-center"
               >
                 <img
-            src={post.authorDto.avatar}
-            className="w-5 h-5 rounded-full object-cover"
-          />
-                u/{post.authorDto.username}
+                  src={post.authorDto.avatar ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
+                  className="w-6 h-6 rounded-full object-cover"
+                  loading="lazy"
+                  alt=""
+                />
+                <p className="text-sm text-neutral-600 hover:text-purple-600 font-medium">
+                  @{post.authorDto.username}
+                </p>
               </Link>
-          <span>
-            {new Date(post.createdAt).toLocaleDateString()}
-          </span>
-          </div>
-          <div>   <h3 className="font-semibold text-lg line-clamp-2 text-neutral-700">
-          {post.title}
-        </h3>
-        </div>
-         
-        </div>
-      {post.imageUrl && (
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full h-96 object-cover rounded-xl"
-          loading="lazy"
-        />
-      )}
+            ) : (
+              <div className="flex flex-row gap-2 items-center">
+                <img
+                  src="https://i.ibb.co/F4qtygsQ/profile-Pic.jpg"
+                  className="w-6 h-6 rounded-full object-cover"
+                  loading="lazy"
+                  alt=""
+                />
+                <p className="text-sm text-neutral-500 font-medium">
+                  {user.username}
+                </p>
+              </div>
+            )}
 
-      
-    </Link>
-    <div className="p-4 flex flex-row gap-2">
-        <VoteButtons voteCount={post.voteScore}/>
-        <button><VscCommentDiscussion size={24}/></button>
+            <span className="text-xs text-neutral-500">
+             • {post.timeAgo || new Date(post.createdAt).toLocaleDateString()}
+            </span>
+            
+          </div>
+
+          <h3 className="font-semibold text-lg line-clamp-2 text-neutral-800">
+            {post.title}
+          </h3>
+
+          {/* Content with Read More */}
+          {post.content && (
+            <div className="w-full text-neutral-700 text-[15px] leading-relaxed">
+              {displayContent}
+              {isLongContent && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()           // ← important! prevent navigation to post page
+                    e.stopPropagation()
+                    setIsExpanded(!isExpanded)
+                  }}
+                  className="ml-1 text-purple-600 hover:text-purple-800 font-medium transition-colors"
+                >
+                  {isExpanded ? ' Read Less' : ' Read More'}
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* External link */}
+          {post.externalLink && (
+            <div className="w-full">
+              <a
+                href={post.externalLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline text-sm break-all"
+                onClick={(e) => e.stopPropagation()} // prevent card click navigation
+              >
+                {post.externalLink}
+              </a>
+            </div>
+          )}
+
+          {/* Image */}
+          {post.imageUrl && (
+            <div className="w-full h-96 overflow-hidden relative mt-3">
+              <img
+                src={post.imageUrl}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                alt={post.title || 'Post image'}
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
+            </div>
+          )}
+        </div>
+      </Link>
+
+      {/* Footer */}
+      <div className="flex flex-row items-center justify-between gap-3 px-4 py-3 bg-white/80 backdrop-blur-md border-t border-neutral-100">
+        <VoteButtons voteCount={post.voteScore} />
+        <button className="text-neutral-600 hover:text-purple-600 transition">
+          <VscCommentDiscussion size={22} />
+        </button>
       </div>
     </div>
-    
   )
 }
 

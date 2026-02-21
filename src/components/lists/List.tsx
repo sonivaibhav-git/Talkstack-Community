@@ -1,7 +1,4 @@
-import type {
-  FollowingItem,
-  FollowingType
-} from '../../features/profile/profile.types'
+import type {FollowingItem,FollowingType} from '../../features/profile/profile.types'
 import type { UseQueryResult } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { IoCloseSharp } from 'react-icons/io5'
@@ -100,6 +97,7 @@ function List ({
                     src={user.avatar}
                     alt={user.username}
                     className='w-10 h-10 rounded-full object-cover'
+                    loading='lazy'
                   />
                   <div className='flex-1'>
                     <p className='font-medium text-neutral-900'>

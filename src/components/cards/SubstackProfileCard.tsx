@@ -2,11 +2,14 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import FollowSubstackBtn from '../substack/FollowSubstackBtn'
 import UnfollowSubstackBtn from '../substack/UnfollowSubstackBtn'
+import type { ReactNode } from 'react'
+import SecondaryBtn from '../buttons/SecondaryBtn'
 type Props = {
   data: any
+  postCount:ReactNode
 }
 
-function SubstackProfileCard ({ data }: Props) {
+function SubstackProfileCard ({ data,postCount }: Props) {
   const navigate = useNavigate()
   return (
     <div
@@ -14,23 +17,24 @@ function SubstackProfileCard ({ data }: Props) {
     h-fit
     rounded-xl
     col-span-2
-    lg:col-span-1
     max-w-full
     bg-white
     shadow-lg
     overflow-hidden
-    md:sticky md:top-0 p-2 mb-10'
+    md:sticky md:top-0 p-2 '
     >
       {/* Banner */}
-      {data.bannerUrl && (
-        <div className='w-full h-48 purple-500'>
-          <img
-            src={data.bannerUrl}
-            className='w-full h-full object-cover'
-            loading='lazy'
-          />
-        </div>
-      )}
+     {data.bannerUrl && (
+  <div className="w-full h-48 overflow-hidden mask-b-to-100%">
+    <img
+      src={data.bannerUrl}
+      className="w-full h-full object-cover"
+      loading="lazy"
+      alt=""
+    />
+  </div>
+)}
+
 
       {/* Content */}
       <div className=' w-full p-2 flex flex-col gap-4'>
@@ -57,12 +61,18 @@ function SubstackProfileCard ({ data }: Props) {
         {/* Description */}
 
         {/* Meta */}
-        <div className='flex flex-row justify-evenly w-full rounded-xl gap-6 border border-neutral-300 text-lg text-neutral-600'>
+        <div className='flex flex-row justify-evenly w-fit px-3 py-2 rounded-xl gap-6 border border-neutral-300 text-lg text-neutral-600'>
           <div className='flex flex-col items-center '>
             <span className='font-semibold text-neutral-800'>
               {data.subscriberCount}
             </span>{' '}
             Subscribers
+          </div>
+          <div className='flex flex-col items-center '>
+            <span className='font-semibold text-neutral-800'>
+              {postCount?postCount:"0"}
+            </span>{' '}
+            Posts
           </div>
 
           <div className='flex flex-col items-center'>
@@ -80,12 +90,11 @@ function SubstackProfileCard ({ data }: Props) {
         {/* Actions */}
         <div className='mt-4 flex gap-3 w-full'>
           {data.viewer.me && (
-            <button
+            <SecondaryBtn
               onClick={() => navigate(`/substacks/${data.slug}/edit`)}
-              className='px-4 py-1 w-full md:w-fit text-neutral-900 flex flex-row items-center gap-2'
             >
               <AiOutlineEdit size={24} /> Edit Substack
-            </button>
+            </SecondaryBtn>
           )}
 
           {data.viewer.me && data.viewer.following ? (

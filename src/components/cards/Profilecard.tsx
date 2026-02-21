@@ -4,7 +4,9 @@ import ActionMenu from '../navigation/ActionMenu'
 import Modal from '../lists/Modal'
 import List from '../lists/List'
 import TrustCard from './TrustCard'
+import { CiEdit } from "react-icons/ci";
 import type { Profile as User, MyStats as Stats} from '../../features/profile/profile.types'
+import SecondaryBtn from '../buttons/SecondaryBtn'
 
 type ProfileCardProps = {
   user: User
@@ -18,7 +20,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
   const [followingOpen, setFollowingOpen] = React.useState(false)
 
   return (
-    <div className='w-full bg-white rounded-3xl p-2 md:p-2 flex flex-col gap-6 relative'>
+    <div className='w-full h-fit bg-white rounded-3xl p-2 md:p-2 flex flex-col gap-6 relative'>
       {/* Menu */}
       <button
         onClick={() => setMenuOpen(true)}
@@ -31,11 +33,12 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
       {/* Header */}
       <div className='flex flex-col sm:flex-row gap-4 items-center sm:items-start'>
         {/* Avatar */}
-        <img
+        {user.avatarUrl && <img
           src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
-          className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-md object-cover bg-linear-to-r from-violet-800 via-violet-400 to-purple-400 p-1'
+          className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-xl object-cover  p-1'
           loading='lazy'
-        />
+        />}
+        
 
         {/* Meta */}
         <div className='flex flex-col gap-3 text-center sm:text-left w-full'>
@@ -52,12 +55,12 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
             {user.bio ?? 'This user prefers mystery over bios.'}
           </p>
 
-          <button
+          <SecondaryBtn
             onClick={() => navigate('/settings/profile')}
-            className='btn '
           >
+            <CiEdit />
             Edit Profile
-          </button>
+          </SecondaryBtn>
         </div>
       </div>
 

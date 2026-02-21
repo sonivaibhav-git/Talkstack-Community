@@ -20,12 +20,12 @@ export default function SubBlock({ substack }: { substack: SubstackProfile }) {
       <div className="relative flex items-start gap-2">
         <img
           src={substack.logoUrl || 'https://i.ibb.co/RWgQGVG/Vector.jpg'}
-          className="w-10 h-10 rounded-xl object-cover sticky top-2 left-2"
+          className="w-10 h-10 rounded-xl object-cover sticky top-2 left-2 shadow-xl"
           alt={substack.name}
           loading='lazy'
         />
-         <div>
-          <h3 className="font-semibold text-wrap">{substack.name}</h3>
+         <div className='flex flex-col items-start'>
+          <h3 className="font-semibold text-wrap text-lg ">{substack.name}</h3>
           <p className="text-xs text-neutral-500 ">
             {substack.slug}
           </p>

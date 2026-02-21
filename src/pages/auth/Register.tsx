@@ -47,6 +47,7 @@ export default function Register () {
           <img
             className='w-10 rounded-xl'
             src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+            loading='lazy'
           />
 
           <div>
@@ -70,6 +71,7 @@ export default function Register () {
             <img
               className='md:hidden w-10 self-center rounded-xl'
               src='https://i.ibb.co/RWgQGVG/Vector.jpg'
+              loading='lazy'
             />
             <h1 className='text-3xl text-center font-bold text-neutral-900'>
               Create Account
@@ -175,6 +177,7 @@ export default function Register () {
               <img
                 className='w-4 h-4 object-cover'
                 src='https://i.ibb.co/dwrxRtJ7/image-removebg-preview.png'
+                loading= "lazy"
               />{' '}
               SignUp with Google
             </button>

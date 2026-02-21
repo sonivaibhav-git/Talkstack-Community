@@ -17,11 +17,8 @@ type SidebarProps = {
 }
 
 export default function Sidebar ({ open }: SidebarProps) {
-
-  
   return (
     <>
-      {/* Mobile backdrop */}
       {open && <div className='fixed inset-0 bg-black/40 z-40 md:hidden' />}
 
       <aside
@@ -36,7 +33,7 @@ export default function Sidebar ({ open }: SidebarProps) {
   `}
       >
         <nav className='flex flex-col h-fit py-4 justify-between'>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-3 px-2'>
             {/* Main */}
             <div className='hidden md:block pb-3 border-b border-neutral-300'>
               <NavItem to='/' icon={<IoHomeOutline />} label='Home' />
@@ -63,13 +60,9 @@ export default function Sidebar ({ open }: SidebarProps) {
               <NavItem to='/' icon={<IoDocumentOutline />} label='Drafts' />
               <NavItem to='/' icon={<GoCommentDiscussion />} label='Feedback' />
             </div>
-
-
-           
-               <LogoutBtn/>
+            <LogoutBtn />
           </div>
         </nav>
-         
       </aside>
     </>
   )

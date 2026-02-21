@@ -37,6 +37,7 @@ const CommentItem = ({ comment }: { comment: Comment }) => {
           src={avatarSrc}
           alt="avatar"
           className="w-7 h-7 rounded-full object-cover"
+          loading='lazy'
         />
 
         <div className="flex-1">

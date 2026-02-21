@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PrimaryBtn from "./PrimaryBtn";
 
 type VoteProps = {
   voteCount: number;
@@ -35,23 +36,18 @@ const VoteButtons = ({ voteCount }: VoteProps) => {
   };
 
   return (
-    <div className="flex w-fit p-1 items-center gap-3 border-2 rounded-xl border-neutral-400">
-      <button
+    <div className="flex px-3 py-2 w-fit  items-center justify-between  border-2 rounded-xl border-neutral-400">
+      <PrimaryBtn
         onClick={handleUpvote}
-        className={`btn ${
-          voteType === "up" ? "bg-green-500 text-white" : "bg-gray-200"
-        }`}
       >
         ▲
-      </button>
+      </PrimaryBtn>
 
-      <span className="font-semibold text-lg">{count}</span>
+      <span className="font-semibold text-md">{count || 0}</span>
 
       <button
         onClick={handleDownvote}
-        className={`btn ${
-          voteType === "down" ? "bg-red-500 text-white" : "bg-gray-200"
-        }`}
+        className={`btn`}
       >
         ▼
       </button>

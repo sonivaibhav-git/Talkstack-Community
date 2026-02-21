@@ -20,6 +20,7 @@ import { AuthProvider } from './context/AuthContext'
 import { AuthGuard } from './features/auth/AuthGuard'
 import { useAuthSession } from './features/auth/useAuthSession'
 import EditSubstackProfile from './pages/substack/EditSubstackProfile'
+import ForgotPassword from './pages/auth/ForgotPassword'
 
 function AppInner () {
   useAuthSession()
@@ -30,6 +31,7 @@ function AppInner () {
         {/* Public routes */}
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
 
         {/* App layout */}
         <Route element={<Layout />}>

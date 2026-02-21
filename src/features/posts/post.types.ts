@@ -4,30 +4,6 @@ export type PostAuthor = {
   avatar?: string
 }
 
-export type Post = {
-  id: string
-  title: string
-  content: string
-  imageUrl: string | null
-  externalLink: string | null
-  voteScore: number
-  createdAt: string
-  timeAgo: string
-  author: PostAuthor
-}
-
-export type SubstackPost = {
-  id: string
-  title: string
-  substackSlug: string
-  imageUrl?: string
-  authorDto: PostAuthor
-  voteScore: number
-  upvotes: number
-  downvotes: number
-  createdAt: string
-}
-
 export type CreatePostPayload = {
   title: string
   content: string
@@ -41,3 +17,32 @@ export type CreatePostResponse = {
   message: string
   data: Post
 }
+
+export type UnifiedPost = {
+  id: string;
+  title: string;
+  content: string;
+  imageUrl: string | null;
+  externalLink: string | null;
+  slug?: string;
+  substackSlug?: string;
+  author: PostAuthor;
+  authorDto?: PostAuthor;
+  voteScore: number;
+  upvotes?: number;
+  downvotes?: number;
+  createdAt: string;
+  timeAgo: string;
+  credibilityResponseDto?: {
+    consensus: string;
+    trustQuality: string;
+    dissent: boolean;
+  };
+};
+
+export type Post = UnifiedPost;
+export type SubstackPost = UnifiedPost;
+export type PostFromFeed = UnifiedPost;
+export type MyPost = UnifiedPost;
+
+export type FeedMode = 'feed' | 'random';
