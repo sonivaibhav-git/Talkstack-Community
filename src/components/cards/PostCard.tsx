@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom'
-import type { SubstackPost } from '../../features/posts/post.types'
+import type { UnifiedPost } from '../../features/posts/post.types'
 import VoteButtons from '../buttons/VoteButtons'
 import { VscCommentDiscussion } from 'react-icons/vsc'
 import { useAuthContext } from '../../context/AuthContext'
 import { useState } from 'react'
 
 type Props = {
-  post: SubstackPost
+  post: UnifiedPost
 }
-
 const PostCard = ({ post }: Props) => {
   const { user } = useAuthContext()
   if (!user) {

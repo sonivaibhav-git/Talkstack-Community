@@ -8,8 +8,7 @@ import Loader from '../components/skeletons/Loader';
 import { useAuthContext } from '../context/AuthContext';
 
 export default function Home() {
-  const { user } = useAuthContext();
-  console.log(user);
+
 
   const [mode, setMode] = useState<'feed' | 'random'>('feed');
 

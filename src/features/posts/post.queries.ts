@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {createPostApi, getPersonalFeed, getPostById, getRandomPosts, getSubstackPostsApi} from '../../api/post.api.ts'
 import type { CreatePostPayload, CreatePostResponse, FeedMode, UnifiedPost } from './post.types.ts'
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+
 export const usePost = (postId: string) => {
   return useQuery({
     queryKey: ['post', postId],
@@ -25,8 +28,7 @@ export const useSubstackPosts = (slug: string) =>
   })
 }
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+
 const PAGE_SIZE = 10;
 export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
   const fetcher = mode === 'feed' ? getPersonalFeed : getRandomPosts;

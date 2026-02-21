@@ -28,7 +28,6 @@ export default function Register () {
     if (!validate()) return
     try {
       await mutateAsync({ username, email, password })
-      console.log('Account created')
       navigate('/')
     } catch {
       console.error('Registration failed')

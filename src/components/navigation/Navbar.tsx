@@ -19,7 +19,6 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
     onMenuClick()
   }
   const { user } = useAuthContext()
-  console.log(user)
 
   return (
     <nav className='fixed top-0 left-0 w-full z-50 bg-neutral-100 border-b border-neutral-300 flex flex-row'>

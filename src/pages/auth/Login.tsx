@@ -33,7 +33,6 @@ export default function Login () {
 
     try {
       await mutateAsync({ username, password })
-      console.log('Logged in')
       navigate('/')
     } catch (err: any) {
       const message =

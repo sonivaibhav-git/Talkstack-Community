@@ -18,10 +18,7 @@ const ProfileUsername = () => {
       <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
     )
   if (isError || !data) return <div>Something went wrong</div>
-
   const { user, stats, viewer } = data
-
-  console.log(user)
   return (
     <div className='w-sm md:w-full flex flex-wrap wrap bg-neutral-100 p-2 gap-5'>
       <div className='relative w-fit md:w-fit flex flex-col items-center gap-2 p-2 md:p-3 bg-white rounded-3xl shadow-lg  md:items-center md:gap-3'>

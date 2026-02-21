@@ -6,7 +6,7 @@ import {
   getMyFollowingApi,
   updateMyProfileApi
 } from '../../api/user.api'
-import type { FollowingItem, MyPost, MyProfile, MyStats, UpdateProfilePayload } from './profile.types'
+import type { FollowingItem, MyProfile,MyPost, MyStats, UpdateProfilePayload } from './profile.types'
 import { toast } from 'react-toastify'
 
 
