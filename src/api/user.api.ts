@@ -31,11 +31,15 @@ export const updateMyProfileApi = (payload: UpdateProfilePayload) => {
 }
 
 
+
+
 // user profiles
 
 export const getPublicProfileApi = (username: string) =>
   axiosPrivate.get(`/profiles/${username}`)
 
+export const getUserPostsApi = (username:string) =>
+  axiosPrivate.get(`/profiles/${username}/posts`)
 
 export const followUserApi = (username: string) =>
   axiosPrivate.post(`/user/${username}/follow`)

@@ -46,3 +46,19 @@ export type PostFromFeed = UnifiedPost;
 export type MyPost = UnifiedPost;
 
 export type FeedMode = 'feed' | 'random';
+
+// votes
+export type VoteType = 'up' | 'down' | null
+
+export type VoteResponse = {
+  success: boolean
+  message: string
+  data: {
+    credibility: {
+      consensus: string
+      trustQuality: string
+      dissent: boolean
+    }
+    accepted: boolean
+  }
+}

@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import {createPostApi, getPersonalFeed, getPostById, getRandomPosts, getSubstackPostsApi} from '../../api/post.api.ts'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import {createPostApi, getPersonalFeed, getPostById, getRandomPosts, getSubstackPostsApi, votePost} from '../../api/post.api.ts'
 import type { CreatePostPayload, CreatePostResponse, FeedMode, UnifiedPost } from './post.types.ts'
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -65,4 +65,44 @@ export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
     isFetchingNextPage: query.isFetchingNextPage,
     fetchNextPage: query.fetchNextPage,
   };
+}
+
+
+// votes
+
+export const useVote = (postId: string) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: votePost,
+
+    onMutate: async ({ type }) => {
+      await queryClient.cancelQueries({ queryKey: ['post', postId] })
+
+      const previous = queryClient.getQueryData<any>(['post', postId])
+
+      queryClient.setQueryData(['post', postId], (old: any) => {
+        if (!old) return old
+
+        const delta = type === 'up' ? 1 : -1
+
+        return {
+          ...old,
+          voteCount: old.voteCount + delta
+        }
+      })
+
+      return { previous }
+    },
+
+    onError: (_, __, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(['post', postId], context.previous)
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['post', postId] })
+    }
+  })
 }

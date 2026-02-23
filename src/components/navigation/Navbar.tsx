@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const { user } = useAuthContext()
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-50 bg-neutral-100 border-b border-neutral-300 flex flex-row'>
+    <nav className='fixed top-0 left-0 w-full z-50 bg-neutral-100 border-b-2 border-neutral-300 flex flex-row'>
       <button
         onClick={handleMenuToggle}
         className='lg:hidden p-1'

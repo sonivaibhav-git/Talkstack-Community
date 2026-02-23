@@ -28,9 +28,9 @@ export default function TrustCard ({ trust, talkscore }: Props) {
             {tier}
           </span>
         </div>
-        <div className='mt-4 h-1 w-full rounded-full bg-neutral-800 overflow-hidden'>
+        <div className='mt-2 h-1 w-full rounded-full bg-neutral-800 overflow-hidden'>
           <div
-            className='h-full rounded-full bg-gradient-to-r from-purple-400 via-violet-400 to-violet-800 transition-all'
+            className='h-full rounded-full bg-linear-to-r from-purple-400 via-violet-400 to-violet-800 transition-all'
             style={{ width: `${pct}%` }}
           />
         </div>

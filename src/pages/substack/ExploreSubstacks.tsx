@@ -1,8 +1,5 @@
 import { useState, useMemo } from 'react'
-import {
-  useAllSubstacks,
-  useTopSubstacks
-} from '../../features/substacks/substack.queries'
+import {useAllSubstacks,useTopSubstacks} from '../../features/substacks/substack.queries'
 import { IoSearchSharp } from 'react-icons/io5'
 import SubstackCard from '../../components/cards/SubstackCard'
 import SubBlock from '../../components/cards/SubBlock'

@@ -31,14 +31,16 @@ function List ({
   max-h-96
   bg-white
   shadow-2xl
+  overflow-y-scroll scrollbar-hide
+  rounded-2xl 
 '
     >
       {/* Toggle Buttons */}
-      <div className='flex justify-between p-2 overflow-hidden'>
-        <div className='flex gap-2'>
+      <div className=' sticky top-0 bg-white flex justify-between p-2 overflow-hidden'>
+        <div className='flex gap-2 '>
           <button
             onClick={() => setFilterType('ALL')}
-            className={`px-3 py-1 rounded-md text-sm font-medium transition ${
+            className={` px-3 py-1 rounded-md text-sm font-medium transition ${
               filterType === 'ALL'
                 ? 'bg-neutral-900 text-white'
                 : 'bg-neutral-200 text-neutral-900 hover:bg-neutral-300'

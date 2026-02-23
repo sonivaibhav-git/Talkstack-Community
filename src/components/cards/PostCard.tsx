@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import type { UnifiedPost } from '../../features/posts/post.types'
-import VoteButtons from '../buttons/VoteButtons'
 import { VscCommentDiscussion } from 'react-icons/vsc'
 import { useAuthContext } from '../../context/AuthContext'
 import { useState } from 'react'
+import VoteButtons from '../buttons/VoteButtons'
 
 type Props = {
   post: UnifiedPost
@@ -92,24 +92,22 @@ const PostCard = ({ post }: Props) => {
           {/* External link */}
           {post.externalLink && (
             <div className="w-full">
-              <a
-                href={post.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline text-sm break-all"
+              <h2
+              
+                className="text-blue-600 hover:underline text-sm "
                 onClick={(e) => e.stopPropagation()} // prevent card click navigation
               >
                 {post.externalLink}
-              </a>
+              </h2>
             </div>
           )}
 
           {/* Image */}
           {post.imageUrl && (
-            <div className="w-full h-96 overflow-hidden relative mt-3">
+            <div className="w-full h-96 overflow-hidden relative mt-3 rounded-xl">
               <img
                 src={post.imageUrl}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full rounded-xl object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
                 alt={post.title || 'Post image'}
               />
@@ -120,8 +118,9 @@ const PostCard = ({ post }: Props) => {
       </Link>
 
       {/* Footer */}
-      <div className="flex flex-row items-center justify-between gap-3 px-4 py-3 bg-white/80 backdrop-blur-md border-t border-neutral-100">
-        <VoteButtons voteCount={post.voteScore} />
+      <div className="flex flex-row items-center justify-between gap-3 px-4 py-3 bg-white/80 backdrop-blur-md border-t border-neutral-100"> 
+      <VoteButtons postId={post.id} />
+        
         <button className="text-neutral-600 hover:text-purple-600 transition">
           <VscCommentDiscussion size={22} />
         </button>

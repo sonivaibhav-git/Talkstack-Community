@@ -26,7 +26,7 @@ export default function Sidebar ({ open }: SidebarProps) {
     fixed top-12 left-0 z-40
     h-[calc(100vh-3rem)]
     w-54 
-    bg-white md:bg-neutral-100 border-r-2 border-neutral-200
+    bg-white md:bg-transparent border-r-2 border-neutral-300
     transform transition-transform duration-300
     ${open ? 'translate-x-0' : '-translate-x-full'}
     md:translate-x-0

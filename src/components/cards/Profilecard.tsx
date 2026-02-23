@@ -20,7 +20,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
   const [followingOpen, setFollowingOpen] = React.useState(false)
 
   return (
-    <div className='w-full h-fit bg-white rounded-3xl p-2 md:p-2 flex flex-col gap-6 relative'>
+    <div className='w-full h-fit bg-white rounded-3xl p-2  flex flex-col gap-2 relative'>
       {/* Menu */}
       <button
         onClick={() => setMenuOpen(true)}
@@ -31,7 +31,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
       <ActionMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* Header */}
-      <div className='flex flex-col sm:flex-row gap-4 items-center sm:items-start'>
+      <div className='flex flex-row gap-4 items-start  '>
         {/* Avatar */}
         {user.avatarUrl && <img
           src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
@@ -41,7 +41,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
         
 
         {/* Meta */}
-        <div className='flex flex-col gap-3 text-center sm:text-left w-full'>
+        <div className='flex flex-col gap-3 text-left w-full'>
           <div>
             <h1 className='text-xl md:text-2xl font-bold text-neutral-800'>
               {user.displayName ?? user.username}

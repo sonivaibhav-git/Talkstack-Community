@@ -1,58 +1,85 @@
-import { useState } from "react";
-import PrimaryBtn from "./PrimaryBtn";
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { usePost } from "../../features/posts/post.queries"
+import { axiosPrivate } from "../../lib/axios/axiosPrivate"
 
-type VoteProps = {
-  voteCount: number;
-};
 
-const VoteButtons = ({ voteCount }: VoteProps) => {
-  const [count, setCount] = useState<number>(voteCount);
-  const [voteType, setVoteType] = useState<"up" | "down" | null>(null);
+type Props = {
+  postId: string
+}
 
-  const handleUpvote = () => {
-    if (voteType === "up") {
-      setCount(count - 1);
-      setVoteType(null);
-    } else if (voteType === "down") {
-      setCount(count + 2);
-      setVoteType("up");
-    } else {
-      setCount(count + 1);
-      setVoteType("up");
+const VoteButtons = ({ postId }: Props) => {
+  const queryClient = useQueryClient()
+  const { data: post } = usePost(postId)
+
+  const mutation = useMutation({
+    mutationFn: async (type: 'up' | 'down') => {
+      const endpoint =
+        type === 'up'
+          ? `/posts/${postId}/upvote`
+          : `/posts/${postId}/downvote`
+
+      return axiosPrivate.post(endpoint)
+    },
+
+    onMutate: async (type) => {
+      await queryClient.cancelQueries({ queryKey: ['post', postId] })
+
+      const previousPost = queryClient.getQueryData<any>([
+        'post',
+        postId
+      ])
+
+      queryClient.setQueryData(['post', postId], (old: any) => {
+        if (!old) return old
+
+        const delta = type === 'up' ? 1 : -1
+
+        return {
+          ...old,
+          voteCount: old.voteCount + delta
+        }
+      })
+
+      return { previousPost }
+    },
+
+    onError: (_, __, context) => {
+      if (context?.previousPost) {
+        queryClient.setQueryData(
+          ['post', postId],
+          context.previousPost
+        )
+      }
+    },
+
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['post', postId]
+      })
     }
-  };
-
-  const handleDownvote = () => {
-    if (voteType === "down") {
-      setCount(count + 1);
-      setVoteType(null);
-    } else if (voteType === "up") {
-      setCount(count - 2);
-      setVoteType("down");
-    } else {
-      setCount(count - 1);
-      setVoteType("down");
-    }
-  };
+  })
 
   return (
-    <div className="flex px-3 py-2 w-fit  items-center justify-between  border-2 rounded-xl border-neutral-400">
-      <PrimaryBtn
-        onClick={handleUpvote}
+    <div className="flex items-center gap-4">
+      <button
+        onClick={() => mutation.mutate('up')}
+        className="px-3 py-1 rounded-md transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"
       >
         ▲
-      </PrimaryBtn>
+      </button>
 
-      <span className="font-semibold text-md">{count || 0}</span>
+      <span className="font-semibold text-lg">
+        {post?.upvotes ?? 0}
+      </span>
 
       <button
-        onClick={handleDownvote}
-        className={`btn`}
+        onClick={() => mutation.mutate('down')}
+        className="px-3 py-1 rounded-md transition bg-gray-200 text-gray-700 hover:bg-red-100 active:bg-red-600 active:text-white"
       >
         ▼
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default VoteButtons;
+export default VoteButtons

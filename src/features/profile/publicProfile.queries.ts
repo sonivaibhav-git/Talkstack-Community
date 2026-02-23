@@ -1,8 +1,9 @@
 // src/features/profile/profile.public.queries.ts
 
 import { useQuery } from '@tanstack/react-query'
-import { getPublicProfileApi } from '../../api/user.api'
+import { getPublicProfileApi, getUserPostsApi } from '../../api/user.api'
 import type { PublicProfileResponse } from './publicProfile.types'
+import type { UnifiedPost } from '../posts/post.types'
 
 
 export const publicProfileKeys = {
@@ -20,3 +21,12 @@ export const usePublicProfile = (username: string) =>
     },
     enabled: !!username,
   })
+
+
+  
+  export const useUserPosts = (username:string) =>
+    useQuery<UnifiedPost[]>({
+      queryKey: ['me', 'posts'],
+      queryFn: async () => (await getUserPostsApi(username)).data
+    })
+  

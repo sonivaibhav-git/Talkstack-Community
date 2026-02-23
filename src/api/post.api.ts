@@ -3,7 +3,8 @@ import type {
   CreatePostResponse,
   Post,
   SubstackPost,
-  UnifiedPost
+  UnifiedPost,
+  VoteResponse
 } from '../features/posts/post.types'
 import { axiosPrivate } from '../lib/axios/axiosPrivate'
 
@@ -66,3 +67,19 @@ export const getRandomPosts = async (params: {
   const res = await axiosPrivate.get<UnifiedPost[]>('/users/me/randompost', { params });
   return res.data;
 };
+
+// Votes
+export const votePost = async ({
+  id,
+  type
+}: {
+  id: string
+  type: 'up' | 'down'
+}) => {
+  const endpoint = type === 'up'
+    ? `/posts/${id}/upvote`
+    : `/posts/${id}/downvote`
+
+  const { data } = await axiosPrivate.post<VoteResponse>(endpoint)
+  return data
+}
