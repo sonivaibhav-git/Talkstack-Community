@@ -8,14 +8,16 @@ export const usePost = (postId: string) => {
   return useQuery({
     queryKey: ['post', postId],
     queryFn: () => getPostById(postId),
-    enabled: !!postId
+    enabled: !!postId,
+    gcTime:1000*60*15
   })
 }
 export const useSubstackPosts = (slug: string) =>
   useQuery({
     queryKey: ['substack-posts', slug],
     queryFn: () => getSubstackPostsApi(slug),
-    enabled: !!slug
+    enabled: !!slug,
+    gcTime:1000*60*15
   })
 
   export const useCreatePost = () => {
@@ -30,31 +32,61 @@ export const useSubstackPosts = (slug: string) =>
 
 
 const PAGE_SIZE = 10;
+
 export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
-  const fetcher = mode === 'feed' ? getPersonalFeed : getRandomPosts;
-
   const query = useInfiniteQuery({
-    queryKey: ['home-feed', mode],
+    queryKey: ['home-feed'],
+    // mode removed from key
 
-    queryFn: async ({ pageParam }): Promise<{ posts: UnifiedPost[]; nextCursor?: string }> => {
-      const posts = await fetcher({
-        limit: PAGE_SIZE,
-        cursor: pageParam as string | undefined,
-      });
+    queryFn: async ({ pageParam }): Promise<{
+      personal: UnifiedPost[];
+      random: UnifiedPost[];
+      nextCursor?: string;
+      
+    }> => {
 
-      const nextCursor = posts.length === PAGE_SIZE ? posts.at(-1)?.createdAt : undefined;
+      const [personalPosts, randomPosts] = await Promise.all([
+        getPersonalFeed({
+          limit: PAGE_SIZE,
+          cursor: pageParam as string | undefined,
+        }),
+        getRandomPosts({
+          limit: PAGE_SIZE,
+          cursor: pageParam as string | undefined,
+        }),
+      ]);
 
-      return { posts, nextCursor };
+      const reference = personalPosts.length === PAGE_SIZE
+        ? personalPosts
+        : randomPosts;
+
+      const nextCursor =
+        reference.length === PAGE_SIZE
+          ? reference.at(-1)?.createdAt
+          : undefined;
+
+      return {
+        personal: personalPosts,
+        random: randomPosts,
+        nextCursor,
+      };
     },
 
     initialPageParam: undefined as string | undefined,
 
     getNextPageParam: (lastPage) => lastPage.nextCursor,
 
-    staleTime: 1000 * 60 * 5, // 5 min
+    staleTime: 1000 * 60 * 10,
+    gcTime:1000*60*15
   });
 
-  const posts = useMemo(() => query.data?.pages.flatMap(p => p.posts) ?? [], [query.data]);
+  const posts = useMemo(() => {
+    if (!query.data) return [];
+
+    return query.data.pages.flatMap(page =>
+      mode === 'feed' ? page.personal : page.random
+    );
+  }, [query.data, mode]);
 
   return {
     posts,
@@ -64,9 +96,9 @@ export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
     hasNextPage: !!query.hasNextPage,
     isFetchingNextPage: query.isFetchingNextPage,
     fetchNextPage: query.fetchNextPage,
+    
   };
 }
-
 
 // votes
 

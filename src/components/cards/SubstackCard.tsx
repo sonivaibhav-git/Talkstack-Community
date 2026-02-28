@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom'
 import type { SubstackProfile } from '../../features/substacks/substack.types'
+import { useSubstackProfile } from '../../features/substacks/substack.queries'
 
 
 export default function SubstackCard({ substack }: { substack: SubstackProfile }) {
@@ -14,6 +15,7 @@ export default function SubstackCard({ substack }: { substack: SubstackProfile }
 
   return (
     <Link
+    onMouseEnter={()=>useSubstackProfile(substack.slug)}
       to={`/substack/${substack.slug}`}
       className="w-full h-full flex flex-col gap-3 p-2 bg-white rounded-2xl shadow-md hover:shadow-xl transition"
     >
@@ -31,10 +33,7 @@ export default function SubstackCard({ substack }: { substack: SubstackProfile }
           </p>
         </div>
       </div>
-      
-      {/* <span className="text-xs  text-neutral-500">
-        {substack.subscriberCount} subscribers
-      </span> */}
+     
     </Link>
   )
 }

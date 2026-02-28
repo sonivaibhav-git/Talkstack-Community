@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { FiMenu } from 'react-icons/fi'
 import { MdClose } from 'react-icons/md'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { PiStackPlus } from 'react-icons/pi'
 import { useAuthContext } from '../../context/AuthContext'
 import PrimaryBtn from '../buttons/PrimaryBtn'
+import CreateSubstackModal from '../../pages/substack/CreateSubstackModal'
 
 interface NavbarProps {
   onMenuClick: () => void
@@ -13,6 +13,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+     const [open, setOpen] = useState(false)
 
   const handleMenuToggle = () => {
     setMenuOpen(v => !v)
@@ -21,7 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const { user } = useAuthContext()
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-50 bg-neutral-100 border-b-2 border-neutral-300 flex flex-row'>
+    <nav className='fixed top-0 left-0 w-full z-50 bg-white flex flex-row'>
       <button
         onClick={handleMenuToggle}
         className='lg:hidden p-1'
@@ -44,10 +45,16 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
         </Link>
 
         <div className=' w-fit flex items-center gap-2 '>
-          <PrimaryBtn>
-            <PiStackPlus />
-            Create Substack
-          </PrimaryBtn>
+      
+
+<PrimaryBtn onClick={() => setOpen(true)}>
+  New Substack
+</PrimaryBtn>
+
+<CreateSubstackModal
+  open={open}
+  onClose={() => setOpen(false)}
+/>
 
           {user && (
             <Link to='/profile/me' className=' w-fit flex flex-col gap-2'>

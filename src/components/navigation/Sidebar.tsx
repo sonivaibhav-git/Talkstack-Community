@@ -8,8 +8,8 @@ import {
   IoCreateOutline
 } from 'react-icons/io5'
 import { GoCommentDiscussion } from 'react-icons/go'
-import type { ReactNode } from 'react'
-import LogoutBtn from '../buttons/Logout'
+import { type ReactNode } from 'react'
+import LogoutBtn from '../buttons/delete/Logout'
 
 type SidebarProps = {
   open: boolean
@@ -17,16 +17,15 @@ type SidebarProps = {
 }
 
 export default function Sidebar ({ open }: SidebarProps) {
+  
   return (
     <>
       {open && <div className='fixed inset-0 bg-black/40 z-40 md:hidden' />}
-
-      <aside
-        className={`
+      <aside className={`
     fixed top-12 left-0 z-40
     h-[calc(100vh-3rem)]
     w-54 
-    bg-white md:bg-transparent border-r-2 border-neutral-300
+    bg-white  rounded-b-2xl
     transform transition-transform duration-300
     ${open ? 'translate-x-0' : '-translate-x-full'}
     md:translate-x-0

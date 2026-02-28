@@ -4,12 +4,13 @@ import FollowSubstackBtn from '../substack/FollowSubstackBtn'
 import UnfollowSubstackBtn from '../substack/UnfollowSubstackBtn'
 import type { ReactNode } from 'react'
 import SecondaryBtn from '../buttons/SecondaryBtn'
+import DeleteSubstackBtn from '../buttons/delete/DeleteSubstackBtn'
 type Props = {
   data: any
-  postCount:ReactNode
+  postCount: ReactNode
 }
 
-function SubstackProfileCard ({ data,postCount }: Props) {
+function SubstackProfileCard ({ data, postCount }: Props) {
   const navigate = useNavigate()
   return (
     <div
@@ -24,17 +25,16 @@ function SubstackProfileCard ({ data,postCount }: Props) {
     md:sticky md:top-0 p-2 '
     >
       {/* Banner */}
-     {data.bannerUrl && (
-  <div className="w-full h-48 overflow-hidden mask-b-to-100%">
-    <img
-      src={data.bannerUrl}
-      className="w-full h-full object-cover"
-      loading="lazy"
-      alt=""
-    />
-  </div>
-)}
-
+      {data.bannerUrl && (
+        <div className='w-full h-48 overflow-hidden mask-b-to-100%'>
+          <img
+            src={data.bannerUrl}
+            className='w-full h-full object-cover'
+            loading='lazy'
+            alt=''
+          />
+        </div>
+      )}
 
       {/* Content */}
       <div className=' w-full p-2 flex flex-col gap-4'>
@@ -58,7 +58,6 @@ function SubstackProfileCard ({ data,postCount }: Props) {
           </p>
         </div>
 
-        {/* Description */}
 
         {/* Meta */}
         <div className='flex flex-row justify-evenly w-fit px-3 py-2 rounded-xl gap-6 border border-neutral-300 text-lg text-neutral-600'>
@@ -70,7 +69,7 @@ function SubstackProfileCard ({ data,postCount }: Props) {
           </div>
           <div className='flex flex-col items-center '>
             <span className='font-semibold text-neutral-800'>
-              {postCount?postCount:"0"}
+              {postCount ? postCount : '0'}
             </span>{' '}
             Posts
           </div>
@@ -81,20 +80,24 @@ function SubstackProfileCard ({ data,postCount }: Props) {
               className='font-medium text-neutral-900 hover:text-purple-500'
             >
               u/
-              <span > {data.admin.username}</span>
+              <span> {data.admin.username}</span>
             </Link>
             Admin{' '}
           </div>
         </div>
 
         {/* Actions */}
-        <div className='mt-4 flex gap-3 w-full'>
+        <div className='mt-4 w-fit flex flex-row  gap-2'>
           {data.viewer.me && (
-            <SecondaryBtn
-              onClick={() => navigate(`/substacks/${data.slug}/edit`)}
-            >
-              <AiOutlineEdit size={24} /> Edit Substack
-            </SecondaryBtn>
+            <div className='flex flex-row gap-2 '>
+              <SecondaryBtn
+                onClick={() => navigate(`/substacks/${data.slug}/edit`)}
+              >
+                <AiOutlineEdit/>
+                Edit Substack
+              </SecondaryBtn>
+              <DeleteSubstackBtn slug={data.slug} />
+            </div>
           )}
 
           {data.viewer.me && data.viewer.following ? (

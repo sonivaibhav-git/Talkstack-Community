@@ -13,7 +13,6 @@ import ProfileMe from './pages/profile/ProfileMe'
 import UserProfile from './pages/profile/UserProfile'
 import SubstackProfile from './pages/substack/SubstackProfile'
 import ExploreSubstacks from './pages/substack/ExploreSubstacks'
-import EditProfile from './pages/profile/EditProfile'
 import PostPage from './pages/posts/PostPage'
 import CreatePost from './pages/posts/CreatePost'
 import { AuthProvider } from './context/AuthContext'
@@ -41,14 +40,14 @@ function AppInner () {
           <Route path='/posts/:postId' element={<PostPage />} />
           <Route path='/posts/create' element={<CreatePost />} />
 
-          <Route
+          {/* <Route
             path='/settings/profile'
             element={
               <AuthGuard>
                 <EditProfile />
               </AuthGuard>
             }
-          />
+          /> */}
           <Route path='/substacks/:slug/edit' element={
             <AuthGuard><EditSubstackProfile /></AuthGuard>} />
 

@@ -24,6 +24,7 @@ const Layout = () => {
           md:pl-54
           h-full
           overflow-y-auto
+          rounded-xl
         "
       >
         <Outlet />

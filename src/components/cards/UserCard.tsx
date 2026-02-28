@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import type { PublicProfileResponse } from '../../features/profile/publicProfile.types'
-import ActionMenu from '../navigation/ActionMenu'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineEdit } from 'react-icons/ai'
 import UnfollowButton from '../user/UnfollowButton'
@@ -9,18 +7,10 @@ import TrustCard from './TrustCard'
 
 function UserCard({ user, stats, viewer }: PublicProfileResponse) {
   const navigate = useNavigate()
-  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
 <div className='w-full sm:w-full max-w-none bg-white rounded-3xl p-2 flex flex-col gap-2 sticky top-2'>
-      {/* Menu */}
-      <button
-        onClick={() => setMenuOpen(true)}
-        className='absolute top-3 right-3 p-2 rounded-full hover:bg-neutral-100 transition'
-      >
-        ⋮
-      </button>
-      <ActionMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      
 
       {/* Header */}
       <div className='flex flex-row gap-4 items-start'>

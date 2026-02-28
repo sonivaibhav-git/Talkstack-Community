@@ -16,7 +16,12 @@ const DestructiveBtn = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`flex w-full items-center gap-2 text-sm font-semibold text-red-500 bg-red-200 px-4 py-2 transition rounded-xl disabled:opacity-60
+      className={`relative inline-flex gap-2 items-center justify-center
+           rounded-xl px-4 py-1
+           bg-red-200 
+           text-red-500  font-semibold
+           shadow-[0_8px_24px_rgba(0,0,0,0.35)]
+           transition-all duration-200;
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
       `}
     >

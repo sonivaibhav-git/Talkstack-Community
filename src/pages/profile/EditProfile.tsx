@@ -1,22 +1,27 @@
 import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useNavigate } from 'react-router-dom'
 import { useUpdateMyProfile } from '../../features/profile/profile.queries'
+import Modal from '../../components/lists/Modal'
+import DestructiveBtn from '../../components/buttons/DestructiveBtn'
 
-const EditProfile = () => {
+type Props = {
+  isOpen: boolean
+  onClose: () => void
+}
+
+const EditProfileModal = ({ isOpen, onClose }: Props) => {
   const [displayName, setDisplayName] = useState('')
   const [bio, setBio] = useState('')
   const [avatarFile, setAvatarFile] = useState<File | null>(null)
   const [avatarPreview, setAvatarPreview] = useState('')
-  const navigate = useNavigate()
+
+  const { mutate, isPending } = useUpdateMyProfile()
 
   const onDrop = useCallback((files: File[]) => {
     const file = files[0]
     if (!file) return
-
     setAvatarFile(file)
-    const previewUrl = URL.createObjectURL(file)
-    setAvatarPreview(previewUrl)
+    setAvatarPreview(URL.createObjectURL(file))
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -25,71 +30,79 @@ const EditProfile = () => {
     onDrop
   })
 
-  const { mutate, isPending } = useUpdateMyProfile()
-
   const submit = () => {
     mutate(
       { displayName, bio, avatarFile },
       {
         onSuccess: () => {
-          navigate(-1)
+          onClose()
         }
       }
     )
   }
 
   return (
-    <div className='m-2 bg-white p-5 rounded-xl  shadow'>
-      <h1 className='text-xl font-semibold mb-4'>Edit Profile</h1>
+    <Modal open={isOpen} onClose={onClose}>
+      <div className='relative bg-white p-6 w-104 max-w-lg rounded-2xl '>
+        <h1 className='text-xl font-bold mb-4'>Edit Profile</h1>
+        <div className="absolute top-5 right-5 "> <DestructiveBtn onClick={() => onClose()} disabled={isPending}>
+            X
+          </DestructiveBtn></div>
+    
+        <div
+          {...getRootProps()}
+          className={`w-fit flex justify-center items-center p-2 border-2 border-dashed rounded-lg text-center cursor-pointer ${
+            isDragActive ? 'border-black' : 'border-neutral-300'
+          }`}
+        >
+          <input {...getInputProps()} />
+          {avatarPreview ? (
+            <img
+              src={avatarPreview}
+              className='w-50 h-50 mx-auto object-cover'
+            />
+          ) : (
+            <p className='text-sm items-center text-neutral-500 min-h-40'>
+              Drag & drop avatar here,
+              <br />
+              or click to upload
+            </p>
+          )}
+        </div>
 
-      {/* Avatar */}
-      <div
-        {...getRootProps()}
-        className={`w-fit p-2 border-2 border-dashed rounded-lg  text-center cursor-pointer ${
-          isDragActive ? 'border-black' : 'border-neutral-300'
-        }`}
-      >
-        <input {...getInputProps()}  />
-        {avatarPreview ? (
-          <img
-            src={avatarPreview}
-            className='w-48 h-48 mx-auto object-center'
-            loading='lazy'
+        <div className='mt-4'>
+          <label className='text-sm font-medium'>Display Name
+          <input
+            className='mt-1 w-full border rounded-lg px-3 py-2'
+            value={displayName}
+            onChange={e => setDisplayName(e.target.value)}
           />
-        ) : (
-          <p className='text-sm  text-neutral-500 min-h-40'>
-            Drag & drop avatar here, <br/> or click to upload
-          </p>
-        )}
-      </div>
+          </label>
+        </div>
 
-      {/* Display Name */}
-      <div className='mt-4'>
-        <label className='text-sm font-medium'>Display Name</label>
-        <input
-          className='mt-1 w-full border rounded-lg px-3 py-2'
-          value={displayName}
-          onChange={e => setDisplayName(e.target.value)}
-        />
+        <div className='mt-4'>
+          <label className='text-sm font-medium'>Bio
+          <textarea
+            className='mt-1 w-full border rounded-lg px-3 py-2'
+            rows={4}
+            value={bio}
+            onChange={e => setBio(e.target.value)}
+          />
+          </label>
+        </div>
+        <div className='flex flex-row gap-2 items-end h-fit '>
+         
+          <button
+            onClick={submit}
+            disabled={isPending}
+            className='mt-6 w-full btn'
+          >
+            {isPending ? 'Saving...' : 'Save Changes'}
+          </button>
+        </div>
       </div>
-
-      {/* Bio */}
-      <div className='mt-4'>
-        <label className='text-sm font-medium'>Bio</label>
-        <textarea
-          className='mt-1 w-full border rounded-lg px-3 py-2'
-          rows={4}
-          value={bio}
-          onChange={e => setBio(e.target.value)}
-        />
-      </div>
-
-      {/* Submit */}
-      <button onClick={submit} disabled={isPending} className='mt-6 w-full btn'>
-        {isPending ? 'Saving...' : 'Save Changes'}
-      </button>
-    </div>
+    </Modal>
   )
 }
 
-export default EditProfile
+export default EditProfileModal

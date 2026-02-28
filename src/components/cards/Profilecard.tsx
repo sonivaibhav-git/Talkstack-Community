@@ -1,12 +1,11 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import ActionMenu from '../navigation/ActionMenu'
+import  { useState } from 'react'
 import Modal from '../lists/Modal'
 import List from '../lists/List'
 import TrustCard from './TrustCard'
 import { CiEdit } from "react-icons/ci";
 import type { Profile as User, MyStats as Stats} from '../../features/profile/profile.types'
 import SecondaryBtn from '../buttons/SecondaryBtn'
+import EditProfileModal from '../../pages/profile/EditProfile'
 
 type ProfileCardProps = {
   user: User
@@ -15,22 +14,12 @@ type ProfileCardProps = {
 }
 
 function Profilecard ({ user, stats, query }:ProfileCardProps) {
-  const navigate = useNavigate()
-  const [menuOpen, setMenuOpen] = React.useState(false)
-  const [followingOpen, setFollowingOpen] = React.useState(false)
+  const [followingOpen, setFollowingOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className='w-full h-fit bg-white rounded-3xl p-2  flex flex-col gap-2 relative'>
-      {/* Menu */}
-      <button
-        onClick={() => setMenuOpen(true)}
-        className='absolute top-3 right-3 p-2 rounded-full hover:bg-neutral-100 transition'
-      >
-        ⋮
-      </button>
-      <ActionMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-
-      {/* Header */}
+{/* Header */}
       <div className='flex flex-row gap-4 items-start  '>
         {/* Avatar */}
         {user.avatarUrl && <img
@@ -55,12 +44,17 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
             {user.bio ?? 'This user prefers mystery over bios.'}
           </p>
 
-          <SecondaryBtn
-            onClick={() => navigate('/settings/profile')}
-          >
-            <CiEdit />
-            Edit Profile
-          </SecondaryBtn>
+         <SecondaryBtn
+        onClick={() => setIsOpen(true)}
+      >
+        <CiEdit/>
+        Edit Profile
+      </SecondaryBtn>
+
+      <EditProfileModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
         </div>
       </div>
 

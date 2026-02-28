@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { useLogout } from '../../features/auth/useLogout'
-import { queryClient } from '../../lib/queryClient'
+import { useLogout } from '../../../features/auth/useLogout'
+import { queryClient } from '../../../lib/queryClient'
+import DestructiveBtn from '../DestructiveBtn'
 
 interface LogoutBtnProps {
   onClose?: () => void
@@ -21,13 +22,9 @@ const LogoutBtn = ({ onClose }: LogoutBtnProps) => {
   }
 
   return (
-    <button
-      onClick={handleLogout}
-      disabled={isPending}
-      className='flex w-full items-center gap-2 text-sm font-semibold text-red-500 bg-red-200 px-4 py-2 transition rounded-xl disabled:opacity-60'
-    >
+    <DestructiveBtn onClick={handleLogout} disabled={isPending}>
       Log out
-    </button>
+    </DestructiveBtn>
   )
 }
 

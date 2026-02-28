@@ -1,4 +1,4 @@
-import { refreshApi } from '../../api/auth.api'
+// import { refreshApi } from '../../api/auth.api'
 import {
   useMyFollowing,
   useMyPosts,
@@ -9,7 +9,6 @@ import Profilecard from '../../components/cards/Profilecard'
 import PostCard from '../../components/cards/PostCard'
 import Loader from '../../components/skeletons/Loader'
 const ProfileMe = () => {
-  refreshApi()
   const profile = useMyProfile()
   const stats = useMyStats()
   const posts = useMyPosts()

@@ -20,6 +20,8 @@ export const usePublicProfile = (username: string) =>
       return res.data
     },
     enabled: !!username,
+    staleTime:600000,
+    gcTime:1000*60*15
   })
 
 
@@ -27,6 +29,8 @@ export const usePublicProfile = (username: string) =>
   export const useUserPosts = (username:string) =>
     useQuery<UnifiedPost[]>({
       queryKey: ['me', 'posts'],
-      queryFn: async () => (await getUserPostsApi(username)).data
+      queryFn: async () => (await getUserPostsApi(username)).data,
+      staleTime:600000,
+      gcTime:1000*60*15
     })
   

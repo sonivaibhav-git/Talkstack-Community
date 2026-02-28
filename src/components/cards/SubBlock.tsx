@@ -39,7 +39,6 @@ export default function SubBlock({ substack }: { substack: SubstackProfile }) {
       <span className="text-xs  text-neutral-500">
         {substack.subscriberCount} subscribers
       </span>
-      <button className='btn'> Join</button>
     </Link>
   )
 }

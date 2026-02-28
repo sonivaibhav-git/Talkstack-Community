@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { usePost } from "../../features/posts/post.queries"
 import { axiosPrivate } from "../../lib/axios/axiosPrivate"
+import { LuArrowBigUp, LuArrowBigDown} from "react-icons/lu";
 
 
 type Props = {
@@ -60,23 +61,24 @@ const VoteButtons = ({ postId }: Props) => {
   })
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex w-fit p-1 rounded-xl items-center gap-4 border-2 border-neutral-300">
       <button
         onClick={() => mutation.mutate('up')}
-        className="px-3 py-1 rounded-md transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"
+        className="px-3 py-1 rounded-xl transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"
       >
-        ▲
+        <LuArrowBigUp />
+
       </button>
 
-      <span className="font-semibold text-lg">
-        {post?.upvotes ?? 0}
+      <span className="font-semibold text-lg text-neutral-700">
+        {post?.voteScore ?? 0}
       </span>
 
       <button
         onClick={() => mutation.mutate('down')}
-        className="px-3 py-1 rounded-md transition bg-gray-200 text-gray-700 hover:bg-red-100 active:bg-red-600 active:text-white"
+        className="px-3 py-1 rounded-xl transition bg-gray-200 text-gray-700 hover:bg-red-100 active:bg-red-600 active:text-white"
       >
-        ▼
+        <LuArrowBigDown/>
       </button>
     </div>
   )

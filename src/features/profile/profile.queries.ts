@@ -14,26 +14,33 @@ import { toast } from 'react-toastify'
 export const useMyProfile = () =>
   useQuery<MyProfile>({
     queryKey: ['me', 'profile'],
-    queryFn: async () => (await getMyProfileApi()).data
+    queryFn: async () => (await getMyProfileApi()).data,
+    gcTime:1000*60*15
   })
 
 export const useMyStats = () =>
   useQuery<MyStats>({
     queryKey: ['me', 'stats'],
-    queryFn: async () => (await getMyStatsApi()).data
+    queryFn: async () => (await getMyStatsApi()).data,
+    staleTime:600000,
+    gcTime:1000*60*15
   })
 
 export const useMyPosts = () =>
   useQuery<MyPost[]>({
     queryKey: ['me', 'posts'],
-    queryFn: async () => (await getMyPostsApi()).data
+    queryFn: async () => (await getMyPostsApi()).data,
+    staleTime:600000,
+    gcTime:1000*60*15
   })
 
 
 export const useMyFollowing = () =>
   useQuery<FollowingItem[]>({
     queryKey: ['me', 'following'],
-    queryFn: async () => (await getMyFollowingApi()).data
+    queryFn: async () => (await getMyFollowingApi()).data,
+    staleTime:600000,
+    gcTime:1000*60*15
   })
 
 
