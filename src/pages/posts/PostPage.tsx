@@ -18,8 +18,8 @@ const PostPage = () => {
 
   
   const concensus = post.credibilityResponseDto?.consensus
-  const trustQuality = post.credibilityResponseDto?.trustQuality
-  const dissent = post.credibilityResponseDto?.dissent
+  // const trustQuality = post.credibilityResponseDto?.trustQuality
+  // const dissent = post.credibilityResponseDto?.dissent
 
   return (
   <div className="w-full min-h-full bg-[#ececec] flex ">
