@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 import { AxiosError } from 'axios'
 import { useSubstackProfile } from '../../features/substacks/substack.queries'
 import { useSubstackPosts } from '../../features/posts/post.queries'
@@ -6,10 +7,11 @@ import NotFound from '../general/NotFound'
 import PostCard from '../../components/cards/PostCard'
 import SubstackProfileCard from '../../components/cards/SubstackProfileCard'
 import Loader from '../../components/skeletons/Loader'
+import CreateDiscussionModal from "../../components/cards/CreateDiscussionModal"
 
 const SubstackProfileInner = () => {
   const { slug } = useParams<{ slug: string }>()
-
+const [open, setOpen] = useState(false)
   const {
     data,
     isLoading,
@@ -54,12 +56,12 @@ const SubstackProfileInner = () => {
     <div className='w-full h-full grid grid-cols-1 gap-6'>
 
       {/* Profile Section */}
-      <div>
+      <div className="p-2">
         <SubstackProfileCard data={data} postCount={posts?.length}/>
       </div>
 
       {/* Posts Section */}
-      <div >
+      <div className="p-2" >
 
         {postsLoading && (
           <div className='w-full flex justify-center items-center py-10'>
@@ -74,7 +76,7 @@ const SubstackProfileInner = () => {
         )}
 
         {!postsLoading && posts && posts.length > 0 && (
-          <div className='columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-4 px-1 md:px-10 space-y-4 mb-10'>
+          <div className='columns-1 sm:columns-2 md:columns-3 lg:columns-3 gap-4  space-y-4 mb-4'>
             {posts.map(post => (
               <div
                 key={post.id}
@@ -85,7 +87,16 @@ const SubstackProfileInner = () => {
             ))}
           </div>
         )}
+          <button onClick={() => setOpen(true)} className=" sticky bottom-15 left-full px-5 py-3 flex items-center justify-center font-bold text-2xl bg-neutral-800 text-white rounded-full" >
+          +
+        </button>
 
+      
+      <CreateDiscussionModal
+        open={open}
+        onClose={() => setOpen(false)}
+        substackSlug={slug!}
+      />
       </div>
     </div>
   )

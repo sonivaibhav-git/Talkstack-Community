@@ -119,13 +119,13 @@ export default function Home () {
           </div>
         )}
       </div>
-      <div
+      {/* <div
         className='hidden md:flex col-span-1 sticky top-0 right-0 z-0 p-2
     h-[calc(100vh-4rem)]
     bg-white  rounded-b-2xl'
       >
-        Hee
-      </div>
+        
+      </div> */}
     </main>
   )
 }

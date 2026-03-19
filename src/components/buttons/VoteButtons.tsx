@@ -61,10 +61,10 @@ const VoteButtons = ({ postId }: Props) => {
   })
 
   return (
-    <div className="flex w-fit p-1 rounded-xl items-center gap-4 border-2 border-neutral-300">
+    <div className="flex w-fit p-2 rounded-xl items-center gap-4  bg-white">
       <button
         onClick={() => mutation.mutate('up')}
-        className="px-3 py-1 rounded-xl transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"
+        className="px-3 py-1 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"
       >
         <LuArrowBigUp />
 
@@ -76,7 +76,7 @@ const VoteButtons = ({ postId }: Props) => {
 
       <button
         onClick={() => mutation.mutate('down')}
-        className="px-3 py-1 rounded-xl transition bg-gray-200 text-gray-700 hover:bg-red-100 active:bg-red-600 active:text-white"
+        className="px-3 py-1 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-red-100 active:bg-red-600 active:text-white"
       >
         <LuArrowBigDown/>
       </button>

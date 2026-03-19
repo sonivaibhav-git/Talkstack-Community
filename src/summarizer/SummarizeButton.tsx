@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import SummaryDrawer from "./SummaryDrawer"
 import { RiAiGenerate } from "react-icons/ri";
+import SecondaryBtn from "../components/buttons/SecondaryBtn"
 
 
 type SummaryResponse = {
@@ -123,14 +124,14 @@ const SummaryButton: React.FC<Props> = ({ title, content }) => {
 
   return (
     <>
-      <button
+      <SecondaryBtn
         onClick={handleClick}
         className="flex flex-row items-center justify-center gap-2 px-3 py-1 rounded-xl bg-white inset-50 shadow-sm hover:shadow-xl hover:bg-neutral-800 hover:text-neutral-200"
       >
         <RiAiGenerate />
 
         Summarize
-      </button>
+      </SecondaryBtn>
 
       <SummaryDrawer
         isOpen={isOpen}

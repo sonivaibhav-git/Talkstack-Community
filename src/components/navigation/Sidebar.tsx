@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import {
   IoHomeOutline,
   IoCompassOutline,
-  IoTrendingUp,
+  // IoTrendingUp,
   IoSettingsOutline,
   IoDocumentOutline,
   IoCreateOutline
@@ -41,7 +41,7 @@ export default function Sidebar ({ open }: SidebarProps) {
                 icon={<IoCompassOutline />}
                 label='Explore'
               />
-              <NavItem to='/trending' icon={<IoTrendingUp />} label='Popular' />
+              {/* <NavItem to='/trending' icon={<IoTrendingUp />} label='Popular' /> */}
               <NavItem
                 to='/posts/create'
                 icon={<IoCreateOutline />}

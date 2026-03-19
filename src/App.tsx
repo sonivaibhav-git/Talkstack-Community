@@ -20,6 +20,7 @@ import { AuthGuard } from './features/auth/AuthGuard'
 import { useAuthSession } from './features/auth/useAuthSession'
 import EditSubstackProfile from './pages/substack/EditSubstackProfile'
 import ForgotPassword from './pages/auth/ForgotPassword'
+import DiscussionPage from './pages/discussions/DiscussionPage'
 
 function AppInner () {
   useAuthSession()
@@ -37,6 +38,7 @@ function AppInner () {
           <Route path='/' element={<Home />} />
           <Route path='/profile/me' element={<ProfileMe />} />
           <Route path='/profile/:username' element={<UserProfile />} />
+           <Route path="/discussion/:id" element={<DiscussionPage />} />
           <Route path='/posts/:postId' element={<PostPage />} />
           <Route path='/posts/create' element={<CreatePost />} />
 

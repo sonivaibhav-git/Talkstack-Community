@@ -41,15 +41,7 @@ const content = post?.content || '';
   return (
     <div className=' w-full  mx-auto '>
       <div className='p-4  bg-white rounded-4xl shadow-xl relative '>
-        <Link
-          to={`/posts/${post.id}`}
-          onClick={() => {
-            sessionStorage.setItem('lastViewedPostId', post.id)
-          }}
-          className='block shadow-inner bg-[#f4f4f4]  p-2 rounded-3xl'
-        >
-          {/* Author */}
-          <div className='flex items-center gap-3 text-sm text-neutral-600 mb-6'>
+         <div className='flex items-center gap-3 text-sm text-neutral-600 mb-6'>
             <img
               src={
                 post.author.avatar ||
@@ -87,6 +79,15 @@ const content = post?.content || '';
               </span>
             </div>
           </div>
+        <Link
+          to={`/posts/${post.id}`}
+          onClick={() => {
+            sessionStorage.setItem('lastViewedPostId', post.id)
+          }}
+          className='block shadow-inner bg-[#f4f4f4]  p-2 rounded-3xl'
+        >
+          {/* Author */}
+         
 
           {/* Image Card */}
           {post.imageUrl && (
@@ -155,8 +156,12 @@ const content = post?.content || '';
           { content.trim().length > 200 && 
           <SummarizeButton title={post.title} content={post.content} /> 
           }
-          <VoteButtons postId={post.id} />
+          
         </div>
+        <div className="absolute bottom-5 right-2"> 
+          <VoteButtons postId={post.id} />
+          </div>
+       
       </div>
     </div>
   )
