@@ -35,9 +35,7 @@ const PAGE_SIZE = 10;
 
 export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
   const query = useInfiniteQuery({
-    queryKey: ['home-feed'],
-    // mode removed from key
-
+    queryKey: ['home-feed',mode],
     queryFn: async ({ pageParam }): Promise<{
       personal: UnifiedPost[];
       random: UnifiedPost[];
