@@ -36,7 +36,7 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
               {user.displayName ?? user.username}
             </h1>
             <p className='text-sm font-semibold text-neutral-400 lowercase'>
-              u/{user.username}
+              {user.username}
             </p>
           </div>
 

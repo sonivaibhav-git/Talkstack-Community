@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useInfiniteHomeFeed } from '../features/posts/post.queries'
 import PostCard from '../components/cards/PostCard'
@@ -7,8 +7,6 @@ import { profileMeCall } from '../call/profile'
 import { substackPageCall } from '../call/substack'
 
 export default function Home () {
-  const [mode, setMode] = useState<'feed' | 'random'>('random')
-
   const postRefs = useRef<Record<string, HTMLDivElement | null>>({})
   const hasRestoredScroll = useRef(false)
 
@@ -24,7 +22,7 @@ export default function Home () {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage
-  } = useInfiniteHomeFeed(mode)
+  } = useInfiniteHomeFeed('feed')
 
   // Infinite scroll
   useEffect(() => {
@@ -60,35 +58,13 @@ export default function Home () {
   substackPageCall()
   return (
     <main className='relative bg-neutral-50/60 grid grid-cols-1 md:grid-cols-3'>
-      <div className='col-span-2 relative max-w-4xl mb-16'>
+      <div className='col-span-2 relative max-w-4xl mb-16 p-2'>
         {/* Header */}
-        <div className='mb-2 flex gap-5 flex-row sticky top-0 z-10 bg-purple-200  rounded-xl '>
-          <div className='w-full flex items-center gap-2  p-1.5'>
-            <button
-              type='button'
-              onClick={() => setMode('random')}
-              className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${
-                mode === 'random'
-                  ? 'bg-white shadow-sm text-neutral-900'
-                  : 'text-neutral-700 hover:text-neutral-900 hover:bg-white/60'
-              }`}
-            >
-              Discover
-            </button>
-
-            <button
-              type='button'
-              onClick={() => setMode('feed')}
-              className={`px-5 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${
-                mode === 'feed'
-                  ? 'bg-white shadow-sm text-neutral-900'
-                  : 'text-neutral-700 hover:text-neutral-900 hover:bg-white/60'
-              }`}
-            >
-              My Feed
-            </button>
+        {/* <div className='mb-2 flex gap-5 flex-row sticky top-0 z-10 bg-purple-200  rounded-xl '>
+          <div className='w-full flex items-center gap-2  p-3'>
+            <h2 className='text-lg font-semibold text-neutral-900'>Feed</h2>
           </div>
-        </div>
+        </div> */}
 
         {/* Content */}
         {isLoading ? (
@@ -129,7 +105,7 @@ export default function Home () {
             {/* Infinite Scroll Trigger */}
             <div ref={inViewRef} className='py-10 flex justify-center min-h-15'>
               {isFetchingNextPage ? (
-                <div className='h-8 w-8 animate-spin rounded-full border-4 border-purple-500 border-t-transparent' />
+                <Loader/>
               ) : hasNextPage ? (
                 <span className='text-sm text-neutral-500'>
                   Loading more...
@@ -143,9 +119,13 @@ export default function Home () {
           </div>
         )}
       </div>
-      <div className='hidden md:flex col-span-1 sticky top-0 right-0 z-0 p-2
+      <div
+        className='hidden md:flex col-span-1 sticky top-0 right-0 z-0 p-2
     h-[calc(100vh-4rem)]
-    bg-white  rounded-b-2xl'>Hee</div>
+    bg-white  rounded-b-2xl'
+      >
+        Hee
+      </div>
     </main>
   )
 }

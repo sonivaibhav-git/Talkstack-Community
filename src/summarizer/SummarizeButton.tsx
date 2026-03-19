@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import SummaryDrawer from "./SummaryDrawer"
+import { RiAiGenerate } from "react-icons/ri";
+
 
 type SummaryResponse = {
   sentences: string[]
@@ -25,17 +27,18 @@ const generateExtractiveSummary = async (
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY
 
   const prompt = `
-Perform extractive summarization.
+Perform hybrid (extractive and abstractive) summarization.
 
 Rules:
 - Copy exact sentences only.
+- Then shorten in simple words and keep the keywords as it is.
 - Do NOT rewrite.
--  Ignore greetings, emojis, and casual chatter.
-- Return at most 3 sentences.
+- Ignore greetings, emojis, and casual chatter.
+- Dont repeat words multiple times consecutively, rewrite in simplest way if this situation occurs.
 - Output strictly valid JSON:
 
 {
-  "sentences": ["exact sentence 1"]
+  "sentences": ["exact sentence "]
 }
 
 TITLE:
@@ -122,8 +125,10 @@ const SummaryButton: React.FC<Props> = ({ title, content }) => {
     <>
       <button
         onClick={handleClick}
-        className="btn"
+        className="flex flex-row items-center justify-center gap-2 px-3 py-1 rounded-xl bg-white inset-50 shadow-sm hover:shadow-xl hover:bg-neutral-800 hover:text-neutral-200"
       >
+        <RiAiGenerate />
+
         Summarize
       </button>
 

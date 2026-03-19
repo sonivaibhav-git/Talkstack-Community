@@ -83,10 +83,24 @@ export function useInfiniteHomeFeed(mode: FeedMode = 'feed') {
   const posts = useMemo(() => {
     if (!query.data) return [];
 
-    return query.data.pages.flatMap(page =>
-      mode === 'feed' ? page.personal : page.random
-    );
-  }, [query.data, mode]);
+    // Combine personal + random posts from each page
+    const all = query.data.pages.flatMap(page => [...page.personal, ...page.random]);
+
+    // Sort by createdAt (newest first) then dedupe by id, keeping the newest
+    all.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    const seen = new Set<string>();
+    const unique: UnifiedPost[] = [];
+
+    for (const p of all) {
+      if (!seen.has(p.id)) {
+        seen.add(p.id);
+        unique.push(p);
+      }
+    }
+
+    return unique;
+  }, [query.data]);
 
   return {
     posts,

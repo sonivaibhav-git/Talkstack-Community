@@ -29,9 +29,9 @@ export default function SubBlock({ substack }: { substack: SubstackProfile }) {
           <p className="text-xs text-neutral-500 ">
             {substack.slug}
           </p>
-          <p className="text-xs text-neutral-500 text-wrap wrap">
-            u/{substack.admin.username}
-          </p>
+          {/* <p className="text-xs text-neutral-500 text-wrap wrap">
+            {substack.admin.username}
+          </p> */}
         </div>
       </div>
      

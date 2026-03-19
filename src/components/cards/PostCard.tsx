@@ -5,6 +5,9 @@ import { useState } from 'react'
 import VoteButtons from '../buttons/VoteButtons'
 import SummarizeButton from '../../summarizer/SummarizeButton'
 import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io'
+import { MdCallSplit } from "react-icons/md";
+
+// import { extractKeywords } from '../../features/keywords/extractKeywords'
 
 type Props = {
   post: UnifiedPost
@@ -26,19 +29,24 @@ const PostCard = ({ post }: Props) => {
       ? contentWords.slice(0, wordLimit).join(' ') + '...'
       : post.content?.trim() || ''
 
-  const concensus = post.credibilityResponseDto?.consensus
+
+// const title = post?.title || '';
+const content = post?.content || '';
+
+// const keywords = extractKeywords(title, content);
+  const consensus = post.credibilityResponseDto?.consensus
   // const trustQuality = post.credibilityResponseDto?.trustQuality
   // const dissent = post.credibilityResponseDto?.dissent
 
   return (
     <div className=' w-full  mx-auto '>
-      <div className='p-4  bg-white rounded-4xl shadow-xl '>
+      <div className='p-4  bg-white rounded-4xl shadow-xl relative '>
         <Link
           to={`/posts/${post.id}`}
           onClick={() => {
             sessionStorage.setItem('lastViewedPostId', post.id)
           }}
-          className='block'
+          className='block shadow-inner bg-[#f4f4f4]  p-2 rounded-3xl'
         >
           {/* Author */}
           <div className='flex items-center gap-3 text-sm text-neutral-600 mb-6'>
@@ -50,35 +58,32 @@ const PostCard = ({ post }: Props) => {
               loading='lazy'
               className='w-8 h-8 rounded-full object-cover'
             />
-
-            <Link
+            <div className='flex flex-col gap-1 '>
+              <Link
               to={`/profile/${post.author.username}`}
-              className='hover:underline'
+              className='hover:underline font-semibold'
             >
-              u/{post.author.username}
+              {post.author.username}
             </Link>
-
-            <span>•</span>
-            <span>{post.timeAgo}</span>
-            <span>{post.slug}</span>
-            
-
+            <span>{post.timeAgo}</span></div>
+         
             <div className='sticky top-6 left-full w-fit'>
               <span
-                className={`flex items-center gap-1 px-4 py-2 text-xs font-medium rounded-full backdrop-blur ${
-                  concensus === 'STRONG'
+                className={`flex w-24 items-center gap-1 px-4 py-2 text-xs text-center font-medium rounded-full backdrop-blur ${
+                  consensus === 'STRONG'
                     ? 'bg-green-500/20 text-green-600 border border-green-500/30'
-                    : concensus === 'WEAK'
+                    : consensus === 'WEAK'
                     ? 'bg-red-500/20 text-red-600 border border-red-500/30'
                     : 'bg-yellow-500/20 text-yellow-600 border border-yellow-500/30'
                 }`}
               >
-                {concensus === 'STRONG' ? (
+                {consensus === 'STRONG' ? (
                   <IoMdTrendingUp />
-                ) : concensus === 'WEAK' ? (
+                ) : consensus === 'WEAK' ? (
                   <IoMdTrendingDown />
-                ) : null}
-                {post.credibilityResponseDto?.consensus || 'Not credible'}
+                ) : <MdCallSplit />}
+                {consensus || 'SPLIT'}
+            
               </span>
             </div>
           </div>
@@ -127,12 +132,29 @@ const PostCard = ({ post }: Props) => {
                 )}
               </p>
             )}
+
+
+             {/* {keywords.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-10">
+              {keywords.map((k) => (
+                <span
+                  key={k.keyword}
+                  className="px-4 py-1 text-xs  bg-neutral-300 text-neutral-600 rounded-full"
+                >
+                  #{k.keyword}
+                </span>
+              ))}
+            </div>
+          )} */}
           </div>
         </Link>
 
         {/* Footer */}
         <div className='flex items-center justify-between mt-6 px-2'>
-          <SummarizeButton title={post.title} content={post.content} />
+
+          { content.trim().length > 200 && 
+          <SummarizeButton title={post.title} content={post.content} /> 
+          }
           <VoteButtons postId={post.id} />
         </div>
       </div>

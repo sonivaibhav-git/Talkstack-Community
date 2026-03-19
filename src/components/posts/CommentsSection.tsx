@@ -8,18 +8,18 @@ const CommentsSection = ({ postId }: { postId: string }) => {
   const postMutation = usePostComment(postId)
 
   return (
-    <div className="relative w-full p-3 bg-neutral-200">
+    <div className="relative w-full">
       <div className="mt-6 space-y-4 h-fit ">
         <h2> Comments</h2>
-        {data?.pages.flatMap(p => p.data).map(comment => (
+        {data?.pages.flatMap(p => p.data).filter(comment => comment).map(comment => (
           <CommentItem key={comment.id} comment={comment} />
         ))}
       </div>
-      <div className='sticky bottom-0 w-full mt-5'>
+      <div className='sticky bottom-0 w-full mt-5 flex flex-col gap-2'>
         <textarea
         value={text}
         onChange={e => setText(e.target.value)}
-        className=" w-full border rounded p-3"
+        className=" w-full  rounded p-3 bg-white"
         placeholder="Add a comment…"
       />
       <button
@@ -27,7 +27,7 @@ const CommentsSection = ({ postId }: { postId: string }) => {
           postMutation.mutate(text)
           setText('')
         }}
-        className="btn"
+        className="btn w-fit"
       >
         Post comment
       </button>
