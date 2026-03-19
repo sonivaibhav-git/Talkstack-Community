@@ -56,9 +56,6 @@ const DiscussionPage = () => {
                     >
                       u/{data.author.username}
                     </Link>
-
-                    <span>•</span>
-                    <span>{data.timeAgo}</span>
                   </div>
                 )}
 

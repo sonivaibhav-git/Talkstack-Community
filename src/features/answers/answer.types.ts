@@ -1,4 +1,4 @@
-import { Author } from '../discussions/discussion.types'
+import type{ Author } from '../discussions/discussion.types'
 
 export interface Answer {
   id: string

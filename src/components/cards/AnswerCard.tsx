@@ -2,7 +2,6 @@ import { useDeleteAnswer, useDownvote, useUpvote } from "../../features/answers/
 import type { Answer } from "../../features/discussions/discussion.types"
 
 import { LuArrowBigUp, LuArrowBigDown} from "react-icons/lu";
-import DestructiveBtn from "../buttons/DestructiveBtn"
 
 
 interface Props {
