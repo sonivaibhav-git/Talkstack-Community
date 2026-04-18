@@ -35,7 +35,7 @@ const SummaryDrawer: React.FC<Props> = ({
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-full sm:w-105 rounded-l-xl
+        className={`fixed top-0 right-0 h-full w-full sm:w-105 
         bg-white border-l border-neutral-200 z-50
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "translate-x-full"}`}

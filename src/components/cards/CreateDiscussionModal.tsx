@@ -37,6 +37,7 @@ const CreateDiscussionModal = ({ open, onClose, substackSlug }: Props) => {
 
     mutate(payload, {
       onSuccess: () => {
+        
         onClose()
         setForm({ title: '', description: '', externalLink: '' })
       }
@@ -45,7 +46,7 @@ const CreateDiscussionModal = ({ open, onClose, substackSlug }: Props) => {
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="bg-neutral-200 p-6 rounded-2xl w-[500px] space-y-5">
+      <div className="bg-neutral-200 p-6 rounded-2xl w-90 md:w-fit space-y-5">
 
         <h2 className="text-neutral-700 font-semibold text-2xl text-center">
          Ask a Question

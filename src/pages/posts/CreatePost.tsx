@@ -71,7 +71,7 @@ const CreatePost = () => {
 
   return (
     <div className='max-w-7xl mx-auto p-6 bg-neutral-100 text-neutral-800 flex-1'>
-      <h1 className='text-2xl font-semibold mb-4'>Create post</h1>
+      <h1 className='text-2xl font-bold mb-4'>Create post</h1>
 
       <div className='flex gap-4 mb-6'>
         {(['text', 'image', 'link'] as Mode[]).map(t => (

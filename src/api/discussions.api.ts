@@ -25,3 +25,7 @@ export const getDiscussionById = async (id: string): Promise<Discussion> => {
   const res = await axiosPrivate.get(`/questions/${id}`)
   return res.data
 }
+export const getDiscussionBySlug = async (slug: string): Promise<Discussion> => {
+  const res = await axiosPrivate.get(`/substacks/${slug}/discussions`)
+  return res.data
+}

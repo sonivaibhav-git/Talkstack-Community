@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../../../features/auth/useLogout'
 import { queryClient } from '../../../lib/queryClient'
 import DestructiveBtn from '../DestructiveBtn'
+import { CiLogout } from 'react-icons/ci'
 
 interface LogoutBtnProps {
   onClose?: () => void
@@ -23,7 +24,8 @@ const LogoutBtn = ({ onClose }: LogoutBtnProps) => {
 
   return (
     <DestructiveBtn onClick={handleLogout} disabled={isPending}>
-      Log out
+      <CiLogout size={20} />
+Log out
     </DestructiveBtn>
   )
 }

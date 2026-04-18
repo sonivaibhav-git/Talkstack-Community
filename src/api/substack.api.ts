@@ -4,7 +4,7 @@ import { axiosPrivate } from "../lib/axios/axiosPrivate"
 
 //create Substack
 export const createSubstack = async (formData: FormData) => {
-  const res = await axiosPrivate.post('/api/substacks', formData, {
+  const res = await axiosPrivate.post('/substacks', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }

@@ -43,8 +43,8 @@ const EditProfileModal = ({ isOpen, onClose }: Props) => {
 
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <div className='relative bg-white p-6 w-104 max-w-lg rounded-2xl '>
-        <h1 className='text-xl font-bold mb-4'>Edit Profile</h1>
+      <div className='relative bg-white p-6 w-104 max-w-lg rounded-2xl z-9999'>
+        <h1 className='text-2xl font-bold mb-4'>Edit Profile</h1>
         <div className="absolute top-5 right-5 "> <DestructiveBtn onClick={() => onClose()} disabled={isPending}>
             X
           </DestructiveBtn></div>

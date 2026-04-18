@@ -25,18 +25,18 @@ const DEFAULT_STOPWORDS = new Set([
 
   "make","makes","making","made","get","gets","getting","got",
   "go","goes","going","went","gone","come","comes","coming",
-  "see","sees","seeing","saw","seen",
+  "see","sees","seeing","saw","seen","app","types","page","code","build","critical","text","asking","great","haven't","i'm","ist",
   "know","knows","knowing","knew","known",
   "think","thinks","thinking","thought",
 
   "really","basically","actually","literally","seriously",
   "maybe","probably","possibly","kind","sort","kinda","sorta",
 
-  "here","there","where","why","how","what","which","who","whom",
+  "here","there","where","why","how","what","which","who","whom","before","after","link"
 
-  "first","second","third","next","last",
+  ,"first","second","third","next","last","minimum","maximum","locate","located","changes"
 
-  "http","https","www","com","now","any","anything", "actually", "doing","more","clean"
+  ,"http","https","www","com","now","any","anything", "actually", "doing","more","clean"
 ])
 
 const URL_REGEX = /https?:\/\/[^\s]+/g

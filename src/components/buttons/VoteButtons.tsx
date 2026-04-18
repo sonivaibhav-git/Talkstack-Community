@@ -61,7 +61,7 @@ const VoteButtons = ({ postId }: Props) => {
   })
 
   return (
-    <div className="flex w-fit p-2 rounded-xl items-center gap-4  bg-white">
+    <div className="flex w-fit p-2 rounded-xl items-center gap-4  z-0 bg-white">
       <button
         onClick={() => mutation.mutate('up')}
         className="px-3 py-1 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-purple-100 active:bg-purple-600 active:text-white"

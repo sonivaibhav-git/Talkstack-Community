@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { createDiscussion, getDiscussionById } from '../../api/discussions.api'
+import { createDiscussion, getDiscussionById, getDiscussionBySlug} from '../../api/discussions.api'
 
 export const useCreateDiscussion = () => {
   return useMutation({
@@ -12,5 +12,12 @@ export const useDiscussion = (id: string) => {
     queryKey: ['discussion', id],
     queryFn: () => getDiscussionById(id),
     enabled: !!id
+  })
+}
+export const useDiscussionSlug = (slug: string) => {
+  return useQuery({
+    queryKey: ['discussion', slug],
+    queryFn: () => getDiscussionBySlug(slug),
+    enabled: !!slug
   })
 }

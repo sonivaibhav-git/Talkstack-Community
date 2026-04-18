@@ -2,7 +2,7 @@ import { useMyFollowing, useMyProfile, useMyStats } from "../features/profile/pr
 
 
 export const profileMeCall = ()=>{
-  useMyFollowing();
-  useMyProfile();
-  useMyStats();
+  const following =useMyFollowing();
+  const profile = useMyProfile();
+  const stats  =useMyStats();
 }

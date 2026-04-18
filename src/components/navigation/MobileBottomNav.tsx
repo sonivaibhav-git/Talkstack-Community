@@ -50,11 +50,7 @@ export default function MobileBottomNav () {
           icon={<IoCreateOutline size={24} />}
           activePath={pathname}
         />
-        <Item
-          to='/posts/trending'
-          icon={<IoTrendingUp size={24} />}
-          activePath={pathname}
-        />
+
         <Item
           to='/profile/me'
           icon={<IoPersonCircleOutline size={24} />}

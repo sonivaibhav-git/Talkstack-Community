@@ -3,10 +3,10 @@ import {useAllSubstacks,useTopSubstacks} from '../../features/substacks/substack
 import { IoSearchSharp } from 'react-icons/io5'
 import SubstackCard from '../../components/cards/SubstackCard'
 import SubBlock from '../../components/cards/SubBlock'
-import Loader from '../../components/skeletons/Loader'
 
 const ExploreSubstacks = () => {
   const [query, setQuery] = useState('')
+
   const top = useTopSubstacks()
   const all = useAllSubstacks()
 
@@ -19,23 +19,10 @@ const ExploreSubstacks = () => {
     )
   }, [all.data, query])
 
-  if (top.isLoading || all.isLoading) {
-    return (
-      <div className='w-full h-full flex justify-center items-center'>  <Loader /></div>
-    )
-  }
-
-  if (top.isError || all.isError) {
-    return (
-      <div className='w-full flex justify-center py-10'>
-        <p className='text-sm text-neutral-500'>Failed to load substacks</p>
-      </div>
-    )
-  }
-
   return (
-    <div className='w-full max-w-7xl mx-auto  sm:px-6 py-4 '>
-      {/* Search */}
+    <div className='w-full max-w-4xl sm:px-6 py-4'>
+
+      {/* 🔍 Search (always render instantly) */}
       <div className='mb-6'>
         <div className='flex items-center gap-2 bg-white border rounded-lg px-3'>
           <IoSearchSharp size={20} className='text-neutral-500' />
@@ -47,29 +34,37 @@ const ExploreSubstacks = () => {
           />
         </div>
       </div>
-      {!!top.data!.length && (
-        <section className='mb-10 flex flex-col '>
-          <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
-            Top Substacks
-          </h1>
-         <div className="grid grid-cols-2 md:grid-cols-2  lg:grid-cols-4  gap-2">
-            {top.data!.map(substack => (
-              <div key={substack.id} className=''>
-                <SubBlock substack={substack} />
-              </div>
-            ))}
-            </div>
-          
-        </section>
-      )}
 
-      {/* All Substacks */}
-      <section>
-        <h1 className='text-2xl font-semibold text-neutral-800 mb-4'>
+      {/* 🔥 Popular */}
+      <section className='mb-10 w-full '>
+        <h1 className='text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2'>
+          Popular
+        </h1>
+
+        <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2">
+          {top.isLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <SubBlockSkeleton key={i} />
+              ))
+            : top.data?.map(substack => (
+                <SubBlock key={substack.id} substack={substack} />
+              ))}
+        </div>
+      </section>
+
+      {/* 📦 All Substacks */}
+      <section className='w-full '>
+        <h1 className='text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-2'>
           All Substacks
         </h1>
 
-        {!!filteredAll.length ? (
+        {all.isLoading ? (
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SubstackCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : filteredAll.length > 0 ? (
           <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
             {filteredAll.map(substack => (
               <SubstackCard
@@ -84,8 +79,21 @@ const ExploreSubstacks = () => {
           </div>
         )}
       </section>
+
     </div>
   )
 }
-
+const SubstackCardSkeleton = () => (
+  <div className="bg-white rounded-xl p-4 animate-pulse space-y-3">
+    <div className="w-full h-32 bg-neutral-300 rounded" />
+    <div className="w-2/3 h-4 bg-neutral-300 rounded" />
+    <div className="w-1/2 h-3 bg-neutral-200 rounded" />
+  </div>
+)
+const SubBlockSkeleton = () => (
+  <div className="bg-white rounded-xl p-3 animate-pulse">
+    <div className="w-full h-20 bg-neutral-300 rounded mb-2" />
+    <div className="w-3/4 h-3 bg-neutral-300 rounded" />
+  </div>
+)
 export default ExploreSubstacks

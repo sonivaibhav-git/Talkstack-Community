@@ -40,7 +40,7 @@ const CreateSubstackModal = ({
 
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="bg-white p-6 rounded-2xl w-125 space-y-6 ">
+      <div className="bg-white p-6 rounded-2xl  w-96 md:w-fit space-y-6 ">
 
         <h2 className="text-2xl text-center font-bold text-neutral-900">
           Create Substack

@@ -17,7 +17,7 @@ const PrimaryBtn = ({
       onClick={onClick}
       disabled={disabled}
       className={`btn
-        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+        ${disabled ? 'opacity-50 cursor-not-allowed h-fit' : ''}
       `}
     >
       {children}

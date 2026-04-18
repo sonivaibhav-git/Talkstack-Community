@@ -18,13 +18,13 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className='w-full h-fit bg-white rounded-3xl p-2  flex flex-col gap-2 relative'>
+    <div className='w-full h-fit bg-white rounded-3xl p-2 mt-12 md:mt-0 flex flex-col gap-2 relative'>
 {/* Header */}
-      <div className='flex flex-row gap-4 items-start  '>
+      <div className='flex  flex-row gap-4 items-start  '>
         {/* Avatar */}
         {user.avatarUrl && <img
           src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
-          className='w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-xl object-cover  p-1'
+          className='w-34  h-34  sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-xl object-cover  p-1'
           loading='lazy'
         />}
         

@@ -23,6 +23,17 @@ export interface Discussion {
   answerCount: number
   answers: Answer[]
 }
+export interface Question {
+  id: string
+  title: string
+  content:string
+  authorUsername:string
+  description: string
+  externalLink?: string
+  author: Author
+  createdAt: string
+  answers: Answer[]
+}
 
 export interface CreateDiscussionPayload {
   title: string

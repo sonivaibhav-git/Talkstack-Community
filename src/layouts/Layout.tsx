@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import Footer from '../components/navigation/Footer'
+
 import Navbar from '../components/navigation/Navbar'
 import Sidebar from '../components/navigation/Sidebar'
 import MobileBottomNav from '../components/navigation/MobileBottomNav'
@@ -10,7 +10,7 @@ const Layout = () => {
 
   return (
     <div className="h-screen bg-neutral-100 overflow-hidden">
-      <Navbar onMenuClick={() => setSidebarOpen(v => !v)} />
+     
 
       <Sidebar
         open={sidebarOpen}
@@ -20,15 +20,14 @@ const Layout = () => {
       {/* Scroll container */}
       <main
         className="
-          pt-12
-          md:pl-54
+          md:ml-72
           h-full
           overflow-y-auto
           rounded-xl
         "
       >
+        <Navbar onMenuClick={() => setSidebarOpen(v => !v)} />
         <Outlet />
-        <Footer />
       </main>
 
       <MobileBottomNav />
