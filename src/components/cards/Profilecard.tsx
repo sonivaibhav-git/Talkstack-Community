@@ -1,33 +1,37 @@
-import  { useState } from 'react'
+import { useState } from 'react'
 import Modal from '../lists/Modal'
 import List from '../lists/List'
 import TrustCard from './TrustCard'
-import { CiEdit } from "react-icons/ci";
-import type { Profile as User, MyStats as Stats} from '../../features/profile/profile.types'
+import { CiEdit } from 'react-icons/ci'
+import type {
+  MyProfile as User,
+  MyStats as Stats
+} from '../../features/profile/profile.types'
 import SecondaryBtn from '../buttons/SecondaryBtn'
 import EditProfileModal from '../../pages/profile/EditProfile'
 
 type ProfileCardProps = {
   user: User
   stats: Stats
-  query:any
+  query: any
 }
 
-function Profilecard ({ user, stats, query }:ProfileCardProps) {
+function Profilecard ({ user, stats, query }: ProfileCardProps) {
   const [followingOpen, setFollowingOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className='w-full h-fit bg-white rounded-3xl p-2 mt-12 md:mt-0 flex flex-col gap-2 relative'>
-{/* Header */}
+      {/* Header */}
       <div className='flex  flex-row gap-4 items-start  '>
         {/* Avatar */}
-        {user.avatarUrl && <img
-          src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
-          className='w-34  h-34  sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-xl object-cover  p-1'
-          loading='lazy'
-        />}
-        
+        {user.avatarUrl && (
+          <img
+            src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
+            className='w-34  h-34  sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-2xl shadow-xl object-cover  p-1'
+            loading='lazy'
+          />
+        )}
 
         {/* Meta */}
         <div className='flex flex-col gap-3 text-left w-full'>
@@ -44,17 +48,12 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
             {user.bio ?? 'This user prefers mystery over bios.'}
           </p>
 
-         <SecondaryBtn
-        onClick={() => setIsOpen(true)}
-      >
-        <CiEdit/>
-        Edit Profile
-      </SecondaryBtn>
+          <SecondaryBtn onClick={() => setIsOpen(true)}>
+            <CiEdit />
+            Edit Profile
+          </SecondaryBtn>
 
-      <EditProfileModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      />
+          <EditProfileModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
       </div>
 
@@ -88,7 +87,6 @@ function Profilecard ({ user, stats, query }:ProfileCardProps) {
     </div>
   )
 }
-
 
 export default Profilecard
 

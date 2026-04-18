@@ -28,7 +28,7 @@ const ProfileUsername = () => {
         {profile.isLoading || !profile.data ? (
           <ProfileCardSkeleton />
         ) : (
-          <UserCard user={user} stats={stats} viewer={viewer} />
+          <UserCard user={user!} stats={stats!} viewer={viewer!} />
         )}
       </div>
 

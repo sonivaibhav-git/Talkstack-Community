@@ -35,8 +35,8 @@ const ProfileMe = () => {
           <ProfileCardSkeleton />
         ) : (
           <Profilecard
-            user={profile.data}
-            stats={stats.data}
+            user={profile.data!}
+            stats={stats.data!}
             query={query}
           />
         )}
@@ -45,7 +45,7 @@ const ProfileMe = () => {
         {posts.isLoading ? (
           <GraphSkeleton />
         ) : (
-          <TopPostsGraph posts={posts.data} />
+          <TopPostsGraph posts={posts.data!} />
         )}
 
       </div>

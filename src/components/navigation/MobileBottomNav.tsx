@@ -3,7 +3,6 @@ import {
   IoHomeOutline,
   IoCompassOutline,
   IoCreateOutline,
-  IoTrendingUp,
   IoPersonCircleOutline
 } from 'react-icons/io5'
 import type { ReactNode } from 'react'
