@@ -29,7 +29,7 @@ function SubstackProfileCard ({ data, postCount }: Props) {
         <div className='w-full h-48 overflow-hidden mask-b-to-100%'>
           <img
             src={data.bannerUrl}
-            className='w-full h-full object-cover'
+            className='w-full h-full object-cover rounded-xl '
             loading='lazy'
             alt=''
           />

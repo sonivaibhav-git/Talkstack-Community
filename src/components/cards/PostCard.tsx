@@ -7,8 +7,8 @@ import SummarizeButton from '../../summarizer/SummarizeButton'
 import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io'
 import { MdCallSplit } from 'react-icons/md'
 import CommentsSection from '../posts/CommentsSection'
-import { CiWarning } from "react-icons/ci";
-
+import { CiWarning } from 'react-icons/ci'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 type Props = {
   post: UnifiedPost
@@ -39,12 +39,14 @@ const PostCard = ({ post }: Props) => {
   const isWeak = consensus === 'WEAK' && !revealed
 
   return (
-    <div className='w-full mx-auto'>
-      <div className='relative p-4 grid gap-2 bg-white rounded-4xl shadow-xl'>
-
+    <div className='w-full h-fit'>
+      <div className='relative px-4 py-2 grid gap-2 bg-white rounded-4xl shadow-xl'>
         {/* 🔥 BLUR WRAPPER */}
-        <div className={`${isWeak ? 'blur-md pointer-events-none select-none' : ''}`}>
-          
+        <div
+          className={`${
+            isWeak ? 'blur-md pointer-events-none select-none' : ''
+          }`}
+        >
           <Link
             to={`/posts/${post.id}`}
             onClick={() => {
@@ -53,20 +55,35 @@ const PostCard = ({ post }: Props) => {
           >
             {/* Header */}
             <div className='flex items-center gap-3 text-sm text-neutral-600 mb-6'>
-              <img
-                src={post.author.avatar || 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
-                className='w-8 h-8 rounded-full object-cover'
-              />
+              {post.author && (
+                <>
+                  <img
+                    src={
+                      post.author?.avatar ||
+                      'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'
+                    }
+                    className='w-8 h-8 rounded-full object-cover'
+                  />
 
-              <div className='flex flex-col gap-1'>
-                <Link
-                  to={`/profile/${post.author.username}`}
-                  className='hover:underline font-semibold'
-                >
-                  {post.author.username}
-                </Link>
-                <span>{post.timeAgo}</span>
-              </div>
+                  <div className='flex flex-col gap-1'>
+                    <Link
+                      to={`/profile/${post.author?.username}`}
+                      className='hover:underline font-semibold'
+                    >
+                      {post.author?.username}
+                    </Link>
+                    <span>{post.timeAgo}</span>
+                  </div>
+                </>
+              )}
+              {!post.author && (
+                <div className='flex flex-col gap-1'>
+                  <span className='font-semibold text-neutral-500'>
+                    Unknown Author
+                  </span>
+                  <span>{post.timeAgo}</span>
+                </div>
+              )}
 
               <div className='ml-auto'>
                 <span
@@ -85,7 +102,7 @@ const PostCard = ({ post }: Props) => {
                   ) : (
                     <MdCallSplit />
                   )}
-                  {consensus || 'SPLIT'}
+                  {consensus || ''}
                 </span>
               </div>
             </div>
@@ -95,16 +112,14 @@ const PostCard = ({ post }: Props) => {
               <div className='relative rounded-3xl overflow-hidden'>
                 <img
                   src={post.imageUrl}
-                  className='w-full h-80 object-cover'
+                  className='w-full h-80 object-cover '
                 />
               </div>
             )}
 
             {/* Content */}
             <div className='mt-6 px-2'>
-              <p className='text-xl font-bold text-neutral-800'>
-                {post.title}
-              </p>
+              <p className='text-xl font-bold text-neutral-800'>{post.title}</p>
 
               {post.content && (
                 <p className='text-sm text-neutral-600'>
@@ -129,10 +144,9 @@ const PostCard = ({ post }: Props) => {
 
         {/* 🚨 OVERLAY */}
         {isWeak && (
-          <div className='absolute inset-0 flex flex-col items-center justify-center bg-black/70 rounded-4xl text-white text-center p-6'>
-            
+          <div className='absolute z-10 inset-0 flex flex-col items-center justify-center bg-black/70 rounded-4xl text-white text-center p-6'>
             <p className='text-lg font-semibold mb-2 flex flex-row items-center gap-2 '>
-              <CiWarning size={34}/> Low Trust Content
+              <CiWarning size={34} /> Low Trust Content
             </p>
 
             <p className='text-sm text-neutral-300 mb-4'>
@@ -143,27 +157,27 @@ const PostCard = ({ post }: Props) => {
               onClick={() => setRevealed(true)}
               className='px-4 py-2 bg-red-400 rounded-full text-sm hover:bg-red-700 transition'
             >
-             View
+              View
             </button>
           </div>
         )}
 
         {/* Footer */}
-        <div className='flex justify-between mt-4 px-2'>
-          {post.title.length > 50  || post.content.length > 100  ?
-          <SummarizeButton title = {post.title} content={post.content}/>
-          : " "}
+        <div className='flex flex-row gap-2 mt-4 px-2'>
+          {post.title.length > 50 || post.content.length > 100 ? (
+            <SummarizeButton title={post.title} content={post.content} />
+          ) : (
+            ' '
+          )}
           <button
             onClick={() => setIsCommentsOpen(prev => !prev)}
-            className='text-sm text-neutral-600'
+            className='text-sm font-semibold text-neutral-600'
           >
-            {isCommentsOpen ? 'Hide Comments' : 'Show Comments'}
+            {isCommentsOpen ? <label className='flex flex-row gap-2 items-center justify-center'> Hide Comments <FaChevronUp /></label> :<label  className='flex flex-row gap-2 items-center justify-center'> Show Comments <FaChevronDown /></label> }
           </button>
         </div>
 
-        {isCommentsOpen && (
-          <CommentsSection postId={post.id} />
-        )}
+        {isCommentsOpen && <CommentsSection postId={post.id} />}
 
         <div className='absolute bottom-5 right-2'>
           <VoteButtons postId={post.id} />

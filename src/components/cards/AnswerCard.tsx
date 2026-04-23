@@ -7,45 +7,53 @@ import { LuArrowBigUp, LuArrowBigDown} from "react-icons/lu";
 interface Props {
   answer: Answer
   discussionId: string
+  author:string
+  me:string
 }
 
-const AnswerCard = ({ answer, discussionId }: Props) => {
+const AnswerCard = ({ answer, discussionId,author , me }: Props) => {
   const { mutate: upvote } = useUpvote(discussionId)
   const { mutate: downvote } = useDownvote(discussionId)
   const { mutate: deleteAns, isPending } = useDeleteAnswer(discussionId)
 
   return (
-    <div className="bg-neutral-200 p-4 rounded-xl space-y-3">
+    <div className="bg-neutral-100 border border-neutral-200 p-4 rounded-2xl shadow-sm hover:shadow-md transition">
+      
+      <h1 className="text-neutral-800  text-lg font-semibold">{answer.author.username}</h1>
+      <p className="text-neutral-800 mb-3">{answer.content}</p>
 
-      <p className="text-neutral-700">{answer.content}</p>
+      <div className="flex items-center justify-between">
 
-      <div className="flex items-center gap-4 text-sm text-neutral-400">
-        <div className="border-2 border-neutral-700 flex flex-row p-1 gap-3 rounded-xl">
+        {/* Votes */}
+        <div className="flex items-center gap-2 bg-white border rounded-xl p-1">
           <button
-          onClick={() => upvote(answer.id)}
-          className="hover:text-white flex flex-row gap-1 hover:bg-purple-300 p-2 rounded-lg"
-        >
-          <LuArrowBigUp size={20 }/><span className="font-semibold text-neutral-800">{answer.upvotes}</span>
-        </button>
+            onClick={() => upvote(answer.id)}
+            className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-purple-500"
+          >
+            <LuArrowBigUp size={18} />
+            <span>{answer.upvotes}</span>
+          </button>
 
-        <button
-          onClick={() => downvote(answer.id)}
-          className="hover:text-white flex flex-row gap-1 hover:bg-red-300 p-2 rounded-lg"
-        >
-          <LuArrowBigDown size={20 }/><span className="font-semibold text-neutral-800">{answer.downvotes}</span>
-        </button></div>
-        
+          <button
+            onClick={() => downvote(answer.id)}
+            className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-red-400"
+          >
+            <LuArrowBigDown size={18} />
+            <span>{answer.downvotes}</span>
+          </button>
+        </div>
 
-        <button
+        {/* Delete */}
+
+        {answer.author.username == author || answer.author.username == me?<button
           onClick={() => deleteAns(answer.id)}
           disabled={isPending}
-          className="text-red-500  bg-red-200 rounded-xl px-3 py-1"
+          className="text-xs text-red-500 hover:bg-red-100 px-3 py-1 rounded-lg"
         >
           Delete
-        </button>
-
+        </button>:" "}
+        
       </div>
-
     </div>
   )
 }

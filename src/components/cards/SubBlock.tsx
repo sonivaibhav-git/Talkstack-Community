@@ -15,30 +15,27 @@ export default function SubBlock({ substack }: { substack: SubstackProfile }) {
   return (
     <Link
       to={`/substack/${substack.slug}`}
-      className=" w-full h-full flex flex-col justify-between gap-3 p-2 bg-white rounded-2xl shadow-md hover:shadow-xl transition"
+      className=" p-2 w-full h-full "
     >
-      <div className="relative flex items-start gap-2">
+      <div className="relative flex flex-row  items-center gap-2">
         <img
           src={substack.logoUrl || 'https://i.ibb.co/RWgQGVG/Vector.jpg'}
-          className="w-10 h-10 rounded-xl object-cover sticky top-2 left-2 shadow-xl"
+          className="w-10 h-10 rounded-full object-cover sticky top-2 left-2 shadow-xl"
           alt={substack.name}
           loading='lazy'
         />
-         <div className='flex flex-col items-start'>
+         <div className='flex flex-col justify-between items-start text-start'>
           <h3 className="font-semibold text-wrap text-lg ">{substack.name}</h3>
-          <p className="text-xs text-neutral-500 ">
-            {substack.slug}
-          </p>
-          {/* <p className="text-xs text-neutral-500 text-wrap wrap">
-            {substack.admin.username}
-          </p> */}
+          {/* <p className="text-xs text-neutral-500 ">{substack.slug}</p> */}
+           <span className="text-xs  text-neutral-500">
+        {substack.subscriberCount} subscribers
+      </span>
         </div>
+       
       </div>
      
       
-      <span className="text-xs  text-neutral-500">
-        {substack.subscriberCount} subscribers
-      </span>
+      
     </Link>
   )
 }
