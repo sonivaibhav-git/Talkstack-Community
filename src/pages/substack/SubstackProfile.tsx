@@ -8,8 +8,7 @@ import SubstackProfileCard from '../../components/cards/SubstackProfileCard'
 import DiscussionItem from '../../components/substack/DiscussionItem'
 import { SubstackProfileSkeleton } from '../../components/skeletons/SubstackProfileSkeleton'
 import PostCardSkeleton from '../../components/skeletons/PostCardSkeleton'
-import { DiscussionSkeleton } from '../../components/skeletons/DiscussionSkeleton'
-// import CreateDiscussionModal from "../../components/cards/CreateDiscussionModal"
+import DiscussionItemSkeleton from '../../components/skeletons/DiscussionItemSkeleton'
 
 const SubstackProfileInner = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -40,7 +39,7 @@ const SubstackProfileInner = () => {
     <div className='w-full h-full grid grid-cols-1 gap-2'>
 
       {/* Profile Section */}
-      <div className="p-2">
+      <div className="p-2 ">
         {isLoading || !data ? (
           <SubstackProfileSkeleton />
         ) : (
@@ -81,7 +80,7 @@ const SubstackProfileInner = () => {
           <h1 className="text-black font-bold text-2xl mb-2">Discussions</h1>
 
           {isLoading ? (
-            <DiscussionSkeleton />
+            <DiscussionItemSkeleton />
           ) : (
             <DiscussionItem slug={slug || ''} />
           )}
