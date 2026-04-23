@@ -10,7 +10,6 @@ import {
 import { GoCommentDiscussion } from 'react-icons/go'
 import { type ReactNode } from 'react'
 import LogoutBtn from '../buttons/delete/Logout'
-import BackButton from '../buttons/BackButton'
 import { useAuthContext } from '../../context/AuthContext'
 import { useState } from 'react'
 import Footer from "./Footer"
@@ -35,26 +34,26 @@ export default function Sidebar ({ open }: SidebarProps) {
         h-[calc(100vh)]
         md:w-72 w-60
         bg-[#f4f4f5] md:bg-[#f4f4f5]
-        px-3 py-4
+        px-3 py-2
         transform transition-transform duration-300
         ${open ? 'translate-x-0' : '-translate-x-full'}
-        md:translate-x-0
+        md:translate-x-0 border border-r-2 border-neutral-200 md:border-none
       `}>
 
-        <BackButton/>
+        
+        {/* <BackButton/> */}
 
         {/* Profile Card */}
         {user ? (
-          <Link to='/profile/me' className='block mb-6'>
-            <div className='bg-white rounded-2xl p-4 shadow-sm  flex flex-row gap-2 items-center text-start'>
-              
+          <Link to='/profile/me' className='block mb-6 '>
+            <div className='bg-white rounded-2xl p-2 shadow-sm  flex flex-row gap-2 items-center text-start mt-8 md:mt-2 '>
               <img
                 src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
                 alt={user.username?? " "}
-                className='w-16 h-16 rounded-xl object-cover shadow-md'
+                className='w-14 h-14 rounded-xl object-cover shadow-md'
               />
               <div className="flex flex-col">
-                <h1 className='mt-2 text-sm font-semibold'>
+                <h1 className=' text-sm font-semibold'>
                   {user.displayName }
                  </h1>
 
@@ -87,9 +86,10 @@ export default function Sidebar ({ open }: SidebarProps) {
 
             {/* GENERAL */}
             <SidebarSection title="General">
-              <NavItem to="/settings" icon={<IoSettingsOutline />} label="Settings" />
-              <NavItem to="/" icon={<IoDocumentOutline />} label="Drafts"  />
+             
+              <NavItem to="/drafts" icon={<IoDocumentOutline />} label="Drafts"  />
               <NavItem to="/" icon={<GoCommentDiscussion />} label="Feedback" />
+               <NavItem to="/settings" icon={<IoSettingsOutline />} label="Settings" />
             </SidebarSection>
               <LogoutBtn />
               <Footer />

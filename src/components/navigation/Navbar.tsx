@@ -17,10 +17,10 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
 
 
   return (
-    <nav className='md:hidden fixed top-0 right-0 z-50 w-full md:w-fit  bg-white flex flex-row'>
+    <nav className='md:hidden fixed top-0 right-0 z-50 w-full md:w-fit bg-white flex flex-row gap-2 items-center px-2'>
       <button
         onClick={handleMenuToggle}
-        className='lg:hidden p-1'
+        className='lg:hidden '
         aria-label='Toggle menu'
       >
         {menuOpen ? (
@@ -29,6 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
           <FiMenu className='text-xl text-neutral-800' />
         )}
       </button>
+       <h1 className="text-purple-500 sticky top-0 z-100  w-full font-bold text-2xl">talkstack</h1>
     </nav>
   )
 }
