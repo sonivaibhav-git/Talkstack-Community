@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import SummaryDrawer from "./SummaryDrawer"
 import { RiAiGenerate } from "react-icons/ri";
-import SecondaryBtn from "../components/buttons/SecondaryBtn";
 import PrimaryBtn from "../components/buttons/PrimaryBtn";
 
 
