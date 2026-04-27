@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useDiscussionSlug } from '../../features/discussions/discussion.queries'
-import Loader from '../skeletons/Loader'
+import DiscussionItemSkeleton from '../skeletons/DiscussionItemSkeleton'
 
 type Props = {
   slug: string
@@ -13,8 +13,8 @@ export default function DiscussionItem({ slug }: Props) {
 
   if (isLoading) {
     return (
-      <div className="w-full flex justify-center py-10">
-        <Loader />
+      <div >
+        <DiscussionItemSkeleton />
       </div>
     )
   }

@@ -6,6 +6,9 @@ import { profileMeCall } from '../call/profile'
 import { substackPageCall } from '../call/substack'
 import { MdOutlineWhatshot } from "react-icons/md";
 import PostCardSkeleton from '../components/skeletons/PostCardSkeleton'
+import { useTopSubstacks } from '../features/substacks/substack.queries'
+import SubBlock from '../components/cards/SubBlock'
+import { Link } from 'react-router-dom'
 
 
 type FeedType = 'feed' | 'dissent'
@@ -57,6 +60,8 @@ export default function Home () {
   // API calls
   profileMeCall()
   substackPageCall()
+  
+  const top = useTopSubstacks()
   // Filtering logic
   const filteredPosts = useMemo(() => {
     if (activeFeed === 'dissent') {
@@ -71,10 +76,40 @@ export default function Home () {
   }, [posts, activeFeed])
 
   return (
-    <main className='relative bg-neutral-100 grid grid-cols-1 md:grid-cols-3'>
+    <main className='relative mx-2 bg-neutral-100 grid grid-cols-1 md:grid-cols-4'>
       
       {/* LEFT SECTION */}
-      <div className='col-span-2 relative max-w-5xl'>
+      <div className='col-span-3 relative  '>
+         <div className='w-full flex flex-row justify-between items-center sticky top-6 md:top-0 h-12 z-40 bg-neutral-100 p-2 mt-6 md:mt-0 '>
+              <h1 className="text-black font-bold text-xl">Feeds</h1>
+
+              <ul className="flex flex-row gap-4 items-center">
+                
+                <h3
+                  onClick={() => setActiveFeed('feed')}
+                  className={`px-2 py-1 font-semibold  cursor-pointer border-black ${
+                    activeFeed === 'feed'
+                      ? 'text-black border-b-2'
+                      : 'text-neutral-400 hover:text-black hover:border-b-2'
+                  }`}
+                >
+                  Stream
+                </h3>
+
+                <h3
+                  onClick={() => setActiveFeed('dissent')}
+                  className={`px-2 py-1 flex flex-row font-semibold  cursor-pointer border-orange-500 ${
+                    activeFeed === 'dissent'
+                      ? 'text-orange-500 border-b-2'
+                      : 'text-neutral-400 hover:text-orange-500 hover:border-b-2 border-orange-500'
+                  }`}
+                >
+                  <MdOutlineWhatshot size={24}/>
+                  Counterpoints
+                </h3>
+
+              </ul>
+            </div>
         {isLoading ? (
           <div className='mt-16 flex flex-col gap-2'> 
           {Array.from({ length: 5 }).map((_, i) => (
@@ -103,50 +138,17 @@ export default function Home () {
         ) : (
           <div>
             
-            {/* HEADER */}
-            <div className='w-full flex flex-row justify-between items-center sticky top-12  md:top-0 h-12 z-40 bg-neutral-100 px-2  mt-12 md:mt-0'>
-              <h1 className="text-black font-bold text-2xl">Feeds</h1>
-
-              <ul className="flex flex-row gap-4 items-center">
-                
-                <h3
-                  onClick={() => setActiveFeed('feed')}
-                  className={`px-2 py-1 font-semibold  cursor-pointer border-black ${
-                    activeFeed === 'feed'
-                      ? 'text-black border-b-2'
-                      : 'text-neutral-400 hover:text-black hover:border-b-2'
-                  }`}
-                >
-                  Stream
-                </h3>
-
-                <h3
-                  onClick={() => setActiveFeed('dissent')}
-                  className={`px-2 py-1 flex flex-row font-semibold  cursor-pointer border-orange-500 ${
-                    activeFeed === 'dissent'
-                      ? 'text-orange-500 border-b-2'
-                      : 'text-neutral-400 hover:text-orange-500 hover:border-b-2 border-orange-500'
-                  }`}
-                >
-                  <MdOutlineWhatshot size={24}/>
-                  Counterpoints
-                </h3>
-
-                <h3 className="px-2 md:hidden flex py-1 font-semibold cursor-pointer text-neutral-400 hover:text-black hover:border-b-2 border-black">
-                  Discussions
-                </h3>
-
-              </ul>
-            </div>
+          
 
             {/* POSTS */}
-            <div className='space-y-2 m-2'>
+            <div className='space-y-1 mt-2 md:mt-0 px-2 flex flex-col gap-2 justify-center'>
               {filteredPosts.map(post => (
                 <div
                   key={post.id}
                   ref={el => {
                     postRefs.current[post.id] = el
                   }}
+                  
                 > 
                   {post ?
                   <PostCard post={post} />:
@@ -174,8 +176,35 @@ export default function Home () {
           </div>
         )}
       </div>
+      <div className="col-span-1 p-2">
+      <section className=' hidden mt-2 w-full md:flex sticky top-4 right-0 bg-white p-2 rounded-xl'>
+        <div className=" w-full grid grid-cols-1 gap-2">
+        <h1 className='text-md font-semibold text-black  tracking-wider mb-2 flex flex-row justify-between'>
+          Suggested for you
+
+          <Link to={'/explore'} className='text-purple-500' >See all</Link>
+        </h1>
+          {top.isLoading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <SubBlockSkeleton key={i} />
+              ))
+            : top.data?.map(substack => (
+                <SubBlock key={substack.id} substack={substack} />
+              ))}
+        </div>
+      </section>
+      </div>
 
     
     </main>
+
+    
   )
 }
+
+const SubBlockSkeleton = () => (
+  <div className="bg-white rounded-xl p-3 animate-pulse">
+    <div className="w-full h-8 bg-neutral-300 rounded mb-2" />
+    <div className="w-3/4 h-3 bg-neutral-300 rounded" />
+  </div>
+)

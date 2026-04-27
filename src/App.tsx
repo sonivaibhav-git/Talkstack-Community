@@ -14,6 +14,7 @@ import UserProfile from './pages/profile/UserProfile'
 import SubstackProfile from './pages/substack/SubstackProfile'
 import ExploreSubstacks from './pages/substack/ExploreSubstacks'
 import PostPage from './pages/posts/PostPage'
+import Drafts from './pages/posts/Drafts'
 import CreatePost from './pages/posts/CreatePost'
 import { AuthProvider } from './context/AuthContext'
 import { AuthGuard } from './features/auth/AuthGuard'
@@ -41,6 +42,7 @@ function AppInner () {
            <Route path="/discussion/:id" element={<DiscussionPage />} />
           <Route path='/posts/:postId' element={<PostPage />} />
           <Route path='/posts/create' element={<CreatePost />} />
+          <Route path='/drafts' element={<Drafts />} />
 
           {/* <Route
             path='/settings/profile'

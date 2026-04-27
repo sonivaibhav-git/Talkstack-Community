@@ -28,7 +28,7 @@ const ProfileMe = () => {
     <div className='w-full grid grid-cols-1 md:grid-cols-3 relative'>
 
       {/* RIGHT PANEL */}
-      <div className='w-full sticky top-0 left-full order-1 md:order-2 p-1 space-y-2'>
+      <div className='w-full order-1 md:order-2 p-1 space-y-2'>
 
         {/* Profile Card */}
         {profile.isLoading || stats.isLoading ? (
@@ -51,9 +51,10 @@ const ProfileMe = () => {
       </div>
 
       {/* POSTS */}
-      <div className='p-1 order-2 md:order-1 w-full col-span-2'>
-        <div className='flex flex-col gap-2 mb-10'>
-
+      <div className=' order-2 md:order-1 w-full col-span-2 '>
+         <h1 className="text-black sticky top-0 z-20  bg-[#F4F4F5] w-full font-bold text-2xl px-4">Posts</h1>
+        <div className='flex flex-col gap-2 mb-10 p-1  bg-[#F4F4F5]'>
+         
           {posts.isLoading ? (
             Array.from({ length: 5 }).map((_, i) => (
               <PostCardSkeleton key={i} />

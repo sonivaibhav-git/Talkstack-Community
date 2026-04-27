@@ -30,7 +30,7 @@ export default function Sidebar ({ open }: SidebarProps) {
       {open && <div className='sticky inset-0 bg-black/40 z-40 md:hidden' />}
 
       <aside className={`
-        fixed top-0 left-0 z-40
+        fixed top-0 left-0 z-44
         h-[calc(100vh)]
         md:w-72 w-60
         bg-[#f4f4f5] md:bg-[#f4f4f5]
@@ -46,7 +46,7 @@ export default function Sidebar ({ open }: SidebarProps) {
         {/* Profile Card */}
         {user ? (
           <Link to='/profile/me' className='block mb-6 '>
-            <div className='bg-white rounded-2xl p-2 shadow-sm  flex flex-row gap-2 items-center text-start mt-8 md:mt-2 '>
+            <div className='bg-white rounded-2xl p-2 shadow-sm  flex flex-row gap-2 items-center text-start mt-20 md:mt-2 '>
               <img
                 src={user.avatarUrl ?? 'https://i.ibb.co/F4qtygsQ/profile-Pic.jpg'}
                 alt={user.username?? " "}

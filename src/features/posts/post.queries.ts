@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import {createPostApi, getPersonalFeed, getPostById, getRandomPosts, getSubstackPostsApi, votePost} from '../../api/post.api.ts'
+import {createPostApi, getPersonalFeed, getPostById, getRandomPosts, getSubstackPostsApi, votePost,fetchDrafts} from '../../api/post.api.ts'
 import type { CreatePostPayload, CreatePostResponse, FeedMode, UnifiedPost } from './post.types.ts'
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -148,5 +148,14 @@ export const useVote = (postId: string) => {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['post', postId] })
     }
+  })
+}
+
+
+export const useUserDrafts = () => {
+  return useQuery({
+    queryKey: ['userDrafts'],
+    queryFn: fetchDrafts,
+     staleTime: 1000 * 60 * 5
   })
 }

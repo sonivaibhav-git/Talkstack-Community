@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { UseQueryResult } from '@tanstack/react-query'
 import type { EditSubstackPayload, SubstackProfile } from './substack.types'
 import { createSubstack, deleteSubstack, editSubstack, getAllSubstacksApi, getSubstackBySlugApi, getTopSubstacksApi } from '../../api/substack.api'
 
@@ -34,7 +35,7 @@ export const useSubstackProfile = (slug: string) =>
     gcTime:1000*60*15
   })
 
-  export const useAllSubstacks = () =>
+  export const useAllSubstacks = (): UseQueryResult<SubstackProfile[], unknown> =>
   useQuery<SubstackProfile[]>({
     queryKey: ['substacks', 'all'],
     queryFn: async () => (await getAllSubstacksApi()).data,

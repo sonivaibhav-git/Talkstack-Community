@@ -83,3 +83,8 @@ export const votePost = async ({
   const { data } = await axiosPrivate.post<VoteResponse>(endpoint)
   return data
 }
+
+export const fetchDrafts = async () => {
+  const { data } = await axiosPrivate.get('/users/me/drafts')
+  return data
+}
